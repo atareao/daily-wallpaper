@@ -1,0 +1,18 @@
+national-geographic-wallpaper
+=============================
+
+national-geographic-wallpaper
+
+Download
+--------
+
+Download the [package][dlp] *or* checkout the source:
+
+    $ git clone https://github.com/atareao/national-geographic-wallpaper.git
+
+Installation
+------------
+
+    $ sudo add-apt-repositoy ppa:atareao/atareao
+    $ sudo apt-get update
+    $ sudo apt-get install national-geographic-wallpaper

@@ -1,0 +1,21 @@
+Source: national-geographic-wallpaper
+Section: utils
+Priority: extra
+Maintainer: Lorenzo Carbonell Cerezo <lorenzo.carbonell.cerezo@gmail.com>
+Build-Depends: debhelper (>= 8), python, python-distutils-extra, python-polib
+Standards-Version: 3.9.3
+Homepage: http://www.atareao.es
+
+Package: national-geographic-wallpaper
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends},
+    python3,
+    python3-gi,
+    python3-lxml,
+    python3-cssselect,
+    python3-requests,
+    python3-crontab,
+    gir1.2-gtk-3.0
+Description: A simple app to set the Photo of the Day of National Geographic
+ This app set the Photo of the Day of National Geographic as your wallpaper
+ every day, automatically.

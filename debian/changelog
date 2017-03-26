@@ -1,0 +1,11 @@
+national-geographic-wallpaper (0.2.0-0extras16.04.1) xenial; urgency=medium
+
+  * Added configuration to mate
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 26 Mar 2017 10:01:10 +0200
+
+national-geographic-wallpaper (0.1.0-0extras16.04.1) xenial; urgency=medium
+
+  * First release
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 26 Mar 2017 09:15:48 +0200
