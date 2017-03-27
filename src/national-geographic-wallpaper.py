@@ -26,6 +26,7 @@ except Exception as e:
     print(e)
     exit(-1)
 from gi.repository import Gtk
+import os
 from crontab import CronTab
 import comun
 
@@ -98,6 +99,8 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
 
 
 if __name__ == '__main__':
+    if not os.path.exists(comun.CONFIG_APP_DIR):
+        os.makedirs(comun.CONFIG_APP_DIR)
     ngw = NGW()
     if ngw.run() == Gtk.ResponseType.ACCEPT:
         ngw.hide()

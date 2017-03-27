@@ -46,19 +46,13 @@ APP_CONF = APP + '.conf'
 CONFIG_DIR = os.path.join(os.path.expanduser('~'), '.config')
 CONFIG_APP_DIR = os.path.join(CONFIG_DIR, APP)
 POTD = os.path.join(CONFIG_APP_DIR, 'potd.jpg')
-if not os.path.exists(CONFIG_DIR):
-    os.makedirs(CONFIG_DIR)
-if not os.path.exists(CONFIG_APP_DIR):
-    os.makedirs(CONFIG_APP_DIR)
 # check if running from source
 if is_package():
     ROOTDIR = os.path.join('/opt/extras.ubuntu.com/', APP)
     APPDIR = os.path.join(ROOTDIR, 'share', APP)
     DICTSDIR = os.path.join(APPDIR, 'dicts')
     LANGDIR = os.path.join(ROOTDIR, 'locale-langpack')
-    BINDIR = os.path.join(ROOTDIR, 'bin')
     ICONDIR = os.path.join(ROOTDIR, 'share/icons')
-    PIXMAPDIR = os.path.join(ROOTDIR, 'share/pixmaps')
     NGD = os.path.join(APPDIR, 'ngdownloader.py')
 else:
     VERSION = VERSION + '-src'
@@ -66,8 +60,6 @@ else:
     LANGDIR = os.path.normpath(os.path.join(ROOTDIR, '../template1'))
     APPDIR = ROOTDIR
     ICONDIR = os.path.normpath(os.path.join(ROOTDIR, '../data'))
-    DICTSDIR = os.path.normpath(os.path.join(ROOTDIR, '../data/dicts'))
-    PIXMAPDIR = ICONDIR
     NGD = os.path.join(APPDIR, 'ngdownloader.py')
 #
 ICON = os.path.join(ICONDIR, APP + '.svg')
