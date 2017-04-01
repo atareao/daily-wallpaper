@@ -27,41 +27,13 @@ except Exception as e:
     exit(-1)
 from gi.repository import Gtk
 import os
-from crontab import CronTab
 import comun
+import shutil
 
 
 COMMENT = '**national-geographic-wallpaper**'
-
-
-def set_ngw():
-    cron = CronTab(user=True)
-    job = cron.new(command=comun.NGD,
-                   comment=COMMENT)
-    job.every_reboot()
-    job.enable(True)
-    cron.write()
-    job = cron.new(command=comun.NGD,
-                   comment=COMMENT)
-    job.hour.on(0)
-    job.minute.on(15)
-    job.enable(True)
-    cron.write()
-
-
-def is_ngw_on():
-    cron = CronTab(user=True)
-    iter = cron.find_comment(comment=COMMENT)
-    for job in iter:
-        if job.is_enabled():
-            return True
-    return False
-
-
-def unset_ngw():
-    cron = CronTab(user=True)
-    cron.remove_all(comment=COMMENT)
-    cron.write()
+FILESTART = os.path.join(os.getenv("HOME"), ".config/autostart/\
+national-geographic-wallpaper-autostart.desktop")
 
 
 class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
@@ -89,7 +61,8 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         grid.add(label10)
         #
         self.switch = Gtk.Switch()
-        self.switch.set_active(is_ngw_on())
+        os.path.exists(FILESTART)
+        self.switch.set_active(os.path.exists(FILESTART))
         grid.attach(self.switch, 1, 0, 1, 1)
         #
         self.show_all()
@@ -104,7 +77,11 @@ if __name__ == '__main__':
     ngw = NGW()
     if ngw.run() == Gtk.ResponseType.ACCEPT:
         ngw.hide()
-        unset_ngw()
-        if ngw.switch.get_active() is True:
-            set_ngw()
+        if ngw.switch.get_active():
+            if not os.path.exists(os.path.dirname(FILESTART)):
+                os.makedirs(os.path.dirname(FILESTART))
+            shutil.copyfile(comun.AUTOSTART, FILESTART)
+        else:
+            if os.path.exists(FILESTART):
+                os.remove(FILESTART)
     ngw.destroy()

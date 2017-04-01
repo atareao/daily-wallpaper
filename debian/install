@@ -1,3 +1,4 @@
 src/*.py /opt/extras.ubuntu.com/national-geographic-wallpaper/share/national-geographic-wallpaper
 data/national-geographic-wallpaper.svg /opt/extras.ubuntu.com/national-geographic-wallpaper/share/icons
 data/extras-national-geographic-wallpaper.desktop /usr/share/applications
+data/national-geographic-wallpaper-autostart.desktop /opt/extras.ubuntu.com/national-geographic-wallpaper/share/national-geographic-wallpaper

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Exec=/opt/extras.ubuntu.com/national-geographic-wallpaper/share/national-geographic-wallpaper/ngdownloader.py
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-Delay=15

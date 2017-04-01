@@ -25,7 +25,6 @@
 import requests
 import os
 from lxml.html import fromstring
-import datetime
 import comun
 from gi.repository import Gio
 from gi.repository import GLib
@@ -58,14 +57,15 @@ def main():
                 r = requests.get(image_url, stream=True)
                 print(r.status_code)
                 if r.status_code == 200:
-                    with open(comun.POTD, 'wb') as f:
-                        for chunk in r.iter_content(1024):
-                            f.write(chunk)
-                    set_background(comun.POTD)
+                    try:
+                        with open(comun.POTD, 'wb') as f:
+                            for chunk in r.iter_content(1024):
+                                f.write(chunk)
+                        set_background(comun.POTD)
+                    except Exception as e:
+                        print(e)
 
 
 if __name__ == '__main__':
     main()
-    today = datetime.date.today()
-    print(today.strftime('%Y%M%d'))
     exit(0)
