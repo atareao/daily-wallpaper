@@ -13,6 +13,6 @@ Download the [package][dlp] *or* checkout the source:
 Installation
 ------------
 
-    $ sudo add-apt-repositoy ppa:atareao/atareao
+    $ sudo add-apt-repository ppa:atareao/atareao
     $ sudo apt-get update
     $ sudo apt-get install national-geographic-wallpaper
