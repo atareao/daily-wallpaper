@@ -5,3 +5,5 @@ Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
 X-GNOME-Autostart-Delay=15
+X-MATE-Autostart-enabled=true
+X-MATE-Autostart-Delay=15

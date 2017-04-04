@@ -1,3 +1,9 @@
+national-geographic-wallpaper (0.3.1-0extras16.04.0) xenial; urgency=medium
+
+  * Added configuration for MATE
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 04 Apr 2017 21:33:33 +0200
+
 national-geographic-wallpaper (0.3.0-0extras16.04.2) xenial; urgency=medium
 
   * Change wallpaper on autostart
