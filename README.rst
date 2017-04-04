@@ -1,18 +1,26 @@
-national-geographic-wallpaper
+National Geographic Wallpaper
 =============================
 
-national-geographic-wallpaper
+Compatibility
+-------------
+
+Works with ...
+
+Not compatible with Mate.
+
 
 Download
 --------
 
-Download the [package][dlp] *or* checkout the source:
+To install from sources clone the repository:
 
     $ git clone https://github.com/atareao/national-geographic-wallpaper.git
+
+and build the debian package.
 
 Installation
 ------------
 
-    $ sudo add-apt-repositoy ppa:atareao/atareao
+    $ sudo add-apt-repository ppa:atareao/atareao
     $ sudo apt-get update
     $ sudo apt-get install national-geographic-wallpaper
