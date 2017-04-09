@@ -1,7 +1,7 @@
-#National Geographic Wallpaper
+# National Geographic Wallpaper
 
 
-##Compatibility
+## Compatibility
 
 * Works with GNOME
 * Not compatible with Mate.
@@ -16,7 +16,7 @@ To install from sources clone the repository:
 
 and build the debian package.
 
-##Installation
+## Installation
 
 Install in Ubuntu, Linux Mint, etc:
 
