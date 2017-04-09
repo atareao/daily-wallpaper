@@ -23,6 +23,7 @@ import os
 import locale
 import gettext
 import subprocess
+import re
 import sys
 
 __author__ = 'Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>'
@@ -103,7 +104,11 @@ APPNAME = APP
 APP_CONF = APP + '.conf'
 CONFIG_DIR = os.path.join(os.path.expanduser('~'), '.config')
 CONFIG_APP_DIR = os.path.join(CONFIG_DIR, APP)
+CONFIG_FILE = os.path.join(CONFIG_APP_DIR, APP_CONF)
 POTD = os.path.join(CONFIG_APP_DIR, 'potd.jpg')
+PARAMS = {
+    'source': 'national-geographic'
+}
 # check if running from source
 if is_package():
     ROOTDIR = os.path.join('/opt/extras.ubuntu.com/', APP)

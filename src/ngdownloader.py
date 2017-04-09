@@ -25,11 +25,14 @@
 import requests
 import os
 from lxml.html import fromstring
+from lxml import etree
 import comun
 from gi.repository import Gio
 from gi.repository import GLib
+from configurator import Configuration
 
 URL = 'http://www.nationalgeographic.com/photography/photo-of-the-day/'
+URLB = 'http://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1&mkt=en-ww'
 
 
 def set_background(afile=None):
@@ -45,7 +48,7 @@ def set_background(afile=None):
             gso.set_value('picture-filename', variant)
 
 
-def main():
+def set_national_geographic_wallpaper():
     r = requests.get(URL)
     if r.status_code == 200:
         doc = fromstring(r.text)
@@ -66,6 +69,39 @@ def main():
                         print(e)
 
 
+def set_bing_wallpaper():
+    r = requests.get(URLB)
+    if r.status_code == 200:
+        try:
+            parser = etree.XMLParser(recover=True)
+            xml = etree.XML(r.content, parser)
+            print(etree.tostring(xml))
+            print('===========')
+            image = xml.find('image')
+            urlBase = image.find('urlBase')
+            image_url = 'http://www.bing.com%s_1920x1200.jpg' % (urlBase.text)
+            print(image_url)
+            r = requests.get(image_url, stream=True)
+            print(r.status_code)
+            if r.status_code == 200:
+                with open(comun.POTD, 'wb') as f:
+                    for chunk in r.iter_content(1024):
+                        f.write(chunk)
+                set_background(comun.POTD)
+            print('===========')
+        except Exception as e:
+            print(e)
+
+
+def change_wallpaper():
+    configuration = Configuration()
+    source = configuration.get('source')
+    if source == 'national-geographic':
+        set_national_geographic_wallpaper()
+    elif source == 'bing':
+        set_bing_wallpaper()
+
+
 if __name__ == '__main__':
-    main()
+    change_wallpaper()
     exit(0)
