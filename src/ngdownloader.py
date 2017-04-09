@@ -30,9 +30,14 @@ import comun
 from gi.repository import Gio
 from gi.repository import GLib
 from configurator import Configuration
+import json
 
-URL = 'http://www.nationalgeographic.com/photography/photo-of-the-day/'
-URLB = 'http://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1&mkt=en-ww'
+
+URL00 = 'http://www.nationalgeographic.com/photography/photo-of-the-day/'
+URL01 = 'http://www.bing.com/HPImageArchive.aspx?\
+format=xml&idx=0&n=1&mkt=en-ww'
+URL02 = 'https://api.gopro.com/v2/channels/feed/playlists/\
+photo-of-the-day.json?platform=web&page=1&per_page=1'
 
 
 def set_background(afile=None):
@@ -49,7 +54,7 @@ def set_background(afile=None):
 
 
 def set_national_geographic_wallpaper():
-    r = requests.get(URL)
+    r = requests.get(URL00)
     if r.status_code == 200:
         doc = fromstring(r.text)
         for meta in doc.cssselect('meta'):
@@ -70,7 +75,7 @@ def set_national_geographic_wallpaper():
 
 
 def set_bing_wallpaper():
-    r = requests.get(URLB)
+    r = requests.get(URL01)
     if r.status_code == 200:
         try:
             parser = etree.XMLParser(recover=True)
@@ -93,6 +98,23 @@ def set_bing_wallpaper():
             print(e)
 
 
+def set_gopro_wallpaper():
+    try:
+        r = requests.get(URL02)
+        if r.status_code == 200:
+            data = json.loads(r.text)
+            image_url = data['media'][0]['thumbnails']['full']['image']
+            r = requests.get(image_url, stream=True)
+            print(r.status_code)
+            if r.status_code == 200:
+                with open(comun.POTD, 'wb') as f:
+                    for chunk in r.iter_content(1024):
+                        f.write(chunk)
+                set_background(comun.POTD)
+    except Exception as e:
+        print(e)
+
+
 def change_wallpaper():
     configuration = Configuration()
     source = configuration.get('source')
@@ -100,6 +122,8 @@ def change_wallpaper():
         set_national_geographic_wallpaper()
     elif source == 'bing':
         set_bing_wallpaper()
+    elif source == 'gopro':
+        set_gopro_wallpaper()
 
 
 if __name__ == '__main__':
