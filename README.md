@@ -6,7 +6,7 @@
 * Works with GNOME
 * Not compatible with Mate.
 
-##Download
+## Download
 
 To install from sources clone the repository:
 
