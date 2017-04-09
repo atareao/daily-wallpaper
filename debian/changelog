@@ -1,3 +1,11 @@
+national-geographic-wallpaper (0.4.0-0extras16.04.0) xenial; urgency=medium
+
+  * Added Bing source
+  * Added option to select source
+  * Added button to force change
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 09 Apr 2017 11:04:39 +0200
+
 national-geographic-wallpaper (0.3.1-0extras16.04.0) xenial; urgency=medium
 
   * Added configuration for MATE
