@@ -39,6 +39,7 @@ format=xml&idx=0&n=1&mkt=en-ww'
 URL02 = 'https://api.gopro.com/v2/channels/feed/playlists/\
 photo-of-the-day.json?platform=web&page=1&per_page=1'
 URL03 = 'http://www.powder.com/photo-of-the-day/'
+URL04 = 'http://www.vokrugsveta.ru/photo_of_the_day/'
 
 
 def set_background(afile=None):
@@ -134,6 +135,34 @@ def set_powder_wallpaper():
                     for chunk in r.iter_content(1024):
                         f.write(chunk)
                 set_background(comun.POTD)
+            print(url)
+    except Exception as e:
+        print(e)
+
+
+def set_vokrugsveta_wallpaper():
+    try:
+        r = requests.get(URL04)
+        if r.status_code == 200:
+            doc = fromstring(r.text)
+            results = doc.cssselect('a.article__pic')
+            url = 'http://www.vokrugsveta.ru/' + results[0].get('href')
+            print(url)
+            r = requests.get(url, stream=True)
+            if r.status_code == 200:
+                doc = fromstring(r.text)
+                results = doc.cssselect('img')
+                for index, result in enumerate(results):
+                    print(index, result.get('src'))
+                i_url = 'http://www.vokrugsveta.ru/' + results[2].get('src')
+                print(i_url)
+                r = requests.get(i_url, stream=True)
+                if r.status_code == 200:
+                    with open(comun.POTD, 'wb') as f:
+                        for chunk in r.iter_content(1024):
+                            f.write(chunk)
+                    set_background(comun.POTD)
+
             print(url)
     except Exception as e:
         print(e)
