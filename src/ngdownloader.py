@@ -32,12 +32,17 @@ from gi.repository import GLib
 from configurator import Configuration
 import json
 import gi
-gi.require_version('Notify', '0.7')
+try:
+    gi.require_version('Notify', '0.7')
+except Exception as e:
+    print(e)
+    exit(-1)
 from gi.repository import Notify
 from datetime import datetime
 
 
-URL00='http://www.nationalgeographic.com/photography/photo-of-the-day/_jcr_content/.gallery.'
+URL00 = 'http://www.nationalgeographic.com/photography/photo-of-the-day/\
+_jcr_content/.gallery.'
 URL01 = 'http://www.bing.com/HPImageArchive.aspx?\
 format=xml&idx=0&n=1&mkt=en-ww'
 URL02 = 'https://api.gopro.com/v2/channels/feed/playlists/\
@@ -64,28 +69,32 @@ def get_national_geographic_data():
     today = datetime.today()
     year = str(today.year)
     if today.month < 10:
-        month =  '0' + str(today.month)
+        month = '0' + str(today.month)
     else:
-        month = str(today.month)    
-    url = URL00 + year + '-' + month +".json"
+        month = str(today.month)
+    url = URL00 + year + '-' + month + '.json'
     r = requests.get(url)
-    if r.status_code == 200:    
-        data = r.json() 
+    if r.status_code == 200:
+        data = r.json()
         if 'items' in data:
             current_photo = data['items'][0]
-            url = current_photo['url'] + current_photo['sizes']['1600']  # TODO: include preferred image size in configuration
-            return dict(url=url, title=current_photo['title'], caption=current_photo['caption'], credit=current_photo['credit'])
+            # TODO: include preferred image size in configuration
+            url = current_photo['url'] + current_photo['sizes']['1600']
+            return dict(url=url,
+                        title=current_photo['title'],
+                        caption=current_photo['caption'],
+                        credit=current_photo['credit'])
     return None
 
 
 def notify_photo_caption(title, caption, credit):
     for m in ['<p>', '</p>', '<br>', '<br />']:
-        caption = caption.replace(m, '')            
+        caption = caption.replace(m, '')
     caption = caption + '<i>Photo credit</i>: ' + credit
     Notify.init(title)
     info = Notify.Notification.new(title, caption, 'dialog-information')
     info.set_timeout(Notify.EXPIRES_NEVER)
-    info.set_urgency(Notify.Urgency.CRITICAL) # Notification stays longer
+    info.set_urgency(Notify.Urgency.CRITICAL)  # Notification stays longer
     info.show()
 
 
@@ -97,7 +106,9 @@ def set_national_geographic_wallpaper():
         r = requests.get(image_url, stream=True)
         print(r.status_code)
         if r.status_code == 200:
-            notify_photo_caption(data['title'], data['caption'], data['credit'])
+            notify_photo_caption(data['title'],
+                                 data['caption'],
+                                 data['credit'])
             try:
                 with open(comun.POTD, 'wb') as f:
                     for chunk in r.iter_content(1024):
