@@ -1,3 +1,10 @@
+national-geographic-wallpaper (0.4.4-0extras16.04.0) zesty; urgency=medium
+
+  * Notification for National Geographic
+  * Notification for GoPro
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Fri, 16 Jun 2017 07:24:05 +0200
+
 national-geographic-wallpaper (0.4.2-0extras16.04.0) xenial; urgency=medium
 
   * Added Powder Magazine source

@@ -90,7 +90,7 @@ def get_national_geographic_data():
 def notify_photo_caption(title, caption, credit):
     for m in ['<p>', '</p>', '<br>', '<br />']:
         caption = caption.replace(m, '')
-    caption = caption + '<i>Photo credit</i>: ' + credit
+    caption = caption + '\n<i>Photo credit</i>: ' + credit
     Notify.init(title)
     info = Notify.Notification.new(title, caption, 'dialog-information')
     info.set_timeout(Notify.EXPIRES_NEVER)
@@ -106,14 +106,14 @@ def set_national_geographic_wallpaper():
         r = requests.get(image_url, stream=True)
         print(r.status_code)
         if r.status_code == 200:
-            notify_photo_caption(data['title'],
-                                 data['caption'],
-                                 data['credit'])
             try:
                 with open(comun.POTD, 'wb') as f:
                     for chunk in r.iter_content(1024):
                         f.write(chunk)
-                    set_background(comun.POTD)
+                set_background(comun.POTD)
+                notify_photo_caption(data['title'],
+                                     data['caption'],
+                                     data['credit'])
             except Exception as e:
                 print(e)
 
@@ -155,6 +155,9 @@ def set_gopro_wallpaper():
                     for chunk in r.iter_content(1024):
                         f.write(chunk)
                 set_background(comun.POTD)
+                notify_photo_caption(data['media'][0]['title'],
+                                     data['media'][0]['description'],
+                                     data['media'][0]['author'])
     except Exception as e:
         print(e)
 
