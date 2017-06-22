@@ -1,7 +1,8 @@
-national-geographic-wallpaper (0.4.4-0extras16.04.0) zesty; urgency=medium
+national-geographic-wallpaper (0.4.4-0extras16.04.1) zesty; urgency=medium
 
   * Notification for National Geographic
   * Notification for GoPro
+  * Added gir1.2-notify-0.7 dependency
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Fri, 16 Jun 2017 07:24:05 +0200
 
