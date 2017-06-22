@@ -15,7 +15,8 @@ Depends: ${misc:Depends}, ${python:Depends},
     python3-cssselect,
     python3-requests,
     python3-crontab,
-    gir1.2-gtk-3.0
+    gir1.2-gtk-3.0,
+    gir1.2-notify-0.7
 Description: A simple app to set the Photo of the Day of National Geographic
  This app set the Photo of the Day of National Geographic as your wallpaper
  every day, automatically.
