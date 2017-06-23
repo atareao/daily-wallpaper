@@ -49,6 +49,21 @@ URL02 = 'https://api.gopro.com/v2/channels/feed/playlists/\
 photo-of-the-day.json?platform=web&page=1&per_page=1'
 URL03 = 'http://www.powder.com/photo-of-the-day/'
 URL04 = 'http://www.vokrugsveta.ru/photo_of_the_day/'
+URL05 = 'https://fstoppers.com/potd'
+
+
+def download_photo(image_url):
+    try:
+        r = requests.get(image_url, stream=True)
+        print(r.status_code)
+        if r.status_code == 200:
+            with open(comun.POTD, 'wb') as f:
+                for chunk in r.iter_content(1024):
+                    f.write(chunk)
+            return True
+    except Exception as e:
+        print(e)
+    return False
 
 
 def set_background(afile=None):
@@ -85,6 +100,45 @@ def get_national_geographic_data():
                         caption=current_photo['caption'],
                         credit=current_photo['credit'])
     return None
+
+
+def set_fstoppers_wallpaper():
+    r = requests.get(URL05)
+    url = None
+    image_url = None
+    if r.status_code == 200:
+        try:
+            parser = etree.HTMLParser(recover=True)
+            html = etree.HTML(r.content, parser)
+            print(etree.tostring(html))
+            print('===========')
+            for element in html.iter('img'):
+                # print(element.tag, element.attrib, element.text)
+                try:
+                    print(element.attrib['data-original'])
+                    url = 'https://fstoppers.com' +\
+                        element.getparent().attrib['href']
+                    break
+                except Exception as e:
+                    print(e)
+            if url is not None:
+                print(url)
+                r = requests.get(url)
+                if r.status_code == 200:
+                    html = etree.HTML(r.content, parser)
+                    print(etree.tostring(html))
+                    for element in html.iter('div'):
+                        try:
+                            if element.attrib['class'] == 'photo':
+                                image_url = element.attrib['data-xlarge']
+                                break
+                        except Exception as e:
+                            print(e)
+        except Exception as e:
+            print(e)
+        if image_url is not None:
+            if download_photo(image_url) is True:
+                set_background(comun.POTD)
 
 
 def notify_photo_caption(title, caption, credit):
@@ -224,6 +278,8 @@ def change_wallpaper():
         set_gopro_wallpaper()
     elif source == 'powder':
         set_powder_wallpaper()
+    elif source == 'fstoppers':
+        set_fstoppers_wallpaper()
 
 
 if __name__ == '__main__':
