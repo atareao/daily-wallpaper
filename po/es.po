@@ -1,0 +1,62 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2017 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# lorenzo <lorenzo.carbonell.cerezo@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: national-geographic-wallpaper 0.4.5\n"
+"Report-Msgid-Bugs-To: lorenzo.carbonell.cerezo@gmail.com\n"
+"POT-Creation-Date: 2017-08-10 10:36+0200\n"
+"PO-Revision-Date: 2017-08-10 10:31+0200\n"
+"Last-Translator: lorenzo <lorenzo.carbonell.cerezo@gmail.com>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:62
+msgid "National Geographic Wallpaper"
+msgstr "National Geographic Wallpaper"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:78
+msgid "Change wallpaper automatically?"
+msgstr "¿Cambio el fondo de pantalla automáticamente?"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:89
+msgid "Select backgrounds source"
+msgstr "Selecciona el origen de los fondos de pantalla"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:94
+msgid "National Geographic"
+msgstr "National Geographic"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:95
+msgid "Bing"
+msgstr "Bing"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:96
+msgid "GoPro"
+msgstr "GoPro"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:97
+msgid "Powder"
+msgstr "Powder"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:98
+msgid "Fstoppers"
+msgstr "Fstoppers"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:99
+msgid "Desktoppr"
+msgstr "Desktoppr"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:107
+msgid "Change now"
+msgstr "Cambiar fondo ahora"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/ngdownloader.py:149
+msgid "Photo credit"
+msgstr "Crédito del fondo de pantalla"

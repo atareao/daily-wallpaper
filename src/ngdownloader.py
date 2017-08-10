@@ -31,7 +31,12 @@ from gi.repository import Gio
 from gi.repository import GLib
 from configurator import Configuration
 import json
+import tempfile
+import hashlib
 import gi
+import pprint
+import shutil
+from comun import _
 try:
     gi.require_version('Notify', '0.7')
 except Exception as e:
@@ -50,20 +55,15 @@ photo-of-the-day.json?platform=web&page=1&per_page=1'
 URL03 = 'http://www.powder.com/photo-of-the-day/'
 URL04 = 'http://www.vokrugsveta.ru/photo_of_the_day/'
 URL05 = 'https://fstoppers.com/potd'
+URL06 = 'https://api.desktoppr.co/1/wallpapers/random'
 
 
-def download_photo(image_url):
-    try:
-        r = requests.get(image_url, stream=True)
-        print(r.status_code)
-        if r.status_code == 200:
-            with open(comun.POTD, 'wb') as f:
-                for chunk in r.iter_content(1024):
-                    f.write(chunk)
-            return True
-    except Exception as e:
-        print(e)
-    return False
+def md5(filename):
+    hash_md5 = hashlib.md5()
+    with open(filename, 'rb') as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
 
 
 def set_background(afile=None):
@@ -137,14 +137,16 @@ def set_fstoppers_wallpaper():
         except Exception as e:
             print(e)
         if image_url is not None:
-            if download_photo(image_url) is True:
+            if download(image_url) is True:
                 set_background(comun.POTD)
 
 
 def notify_photo_caption(title, caption, credit):
+    if len(caption) > 255:
+        caption = caption[:252] + '...'
     for m in ['<p>', '</p>', '<br>', '<br />']:
         caption = caption.replace(m, '')
-    caption = caption + '\n<i>Photo credit</i>: ' + credit
+    caption = caption + '\n<i>' + _('Photo credit') + '</i>: ' + credit
     Notify.init(title)
     info = Notify.Notification.new(title, caption, 'dialog-information')
     info.set_timeout(Notify.EXPIRES_NEVER)
@@ -155,21 +157,12 @@ def notify_photo_caption(title, caption, credit):
 def set_national_geographic_wallpaper():
     data = get_national_geographic_data()
     if data:
-        image_url = data['url']
-        print(image_url)
-        r = requests.get(image_url, stream=True)
-        print(r.status_code)
-        if r.status_code == 200:
-            try:
-                with open(comun.POTD, 'wb') as f:
-                    for chunk in r.iter_content(1024):
-                        f.write(chunk)
-                set_background(comun.POTD)
-                notify_photo_caption(data['title'],
-                                     data['caption'],
-                                     data['credit'])
-            except Exception as e:
-                print(e)
+        url = data['url']
+        if download(url) is True:
+            set_background(comun.POTD)
+            notify_photo_caption(data['title'],
+                                 data['caption'],
+                                 data['credit'])
 
 
 def set_bing_wallpaper():
@@ -182,14 +175,8 @@ def set_bing_wallpaper():
             print('===========')
             image = xml.find('image')
             urlBase = image.find('urlBase')
-            image_url = 'http://www.bing.com%s_1920x1200.jpg' % (urlBase.text)
-            print(image_url)
-            r = requests.get(image_url, stream=True)
-            print(r.status_code)
-            if r.status_code == 200:
-                with open(comun.POTD, 'wb') as f:
-                    for chunk in r.iter_content(1024):
-                        f.write(chunk)
+            url = 'http://www.bing.com%s_1920x1200.jpg' % (urlBase.text)
+            if download(url) is True:
                 set_background(comun.POTD)
             print('===========')
         except Exception as e:
@@ -201,13 +188,8 @@ def set_gopro_wallpaper():
         r = requests.get(URL02)
         if r.status_code == 200:
             data = json.loads(r.text)
-            image_url = data['media'][0]['thumbnails']['full']['image']
-            r = requests.get(image_url, stream=True)
-            print(r.status_code)
-            if r.status_code == 200:
-                with open(comun.POTD, 'wb') as f:
-                    for chunk in r.iter_content(1024):
-                        f.write(chunk)
+            url = data['media'][0]['thumbnails']['full']['image']
+            if download(url) is True:
                 set_background(comun.POTD)
                 notify_photo_caption(data['media'][0]['title'],
                                      data['media'][0]['description'],
@@ -227,14 +209,8 @@ def set_powder_wallpaper():
                 print(key, results[0].get(key))
             url = results[0].get('data-srcset').split(',')[0].split(' ')[0]
             url = '-'.join(url.split('-')[:-1]) + '.' + url.split('.')[-1]
-            r = requests.get(url, stream=True)
-            print(r.status_code)
-            if r.status_code == 200:
-                with open(comun.POTD, 'wb') as f:
-                    for chunk in r.iter_content(1024):
-                        f.write(chunk)
+            if download(url) is True:
                 set_background(comun.POTD)
-            print(url)
     except Exception as e:
         print(e)
 
@@ -254,17 +230,52 @@ def set_vokrugsveta_wallpaper():
                 for index, result in enumerate(results):
                     print(index, result.get('src'))
                 i_url = 'http://www.vokrugsveta.ru/' + results[2].get('src')
-                print(i_url)
-                r = requests.get(i_url, stream=True)
-                if r.status_code == 200:
-                    with open(comun.POTD, 'wb') as f:
-                        for chunk in r.iter_content(1024):
-                            f.write(chunk)
+                if download(i_url) is True:
                     set_background(comun.POTD)
 
             print(url)
     except Exception as e:
         print(e)
+
+
+def set_desktoppr_wallpaper():
+    try:
+        r = requests.get(URL06)
+        if r.status_code == 200:
+            ans = r.json()
+            pprint.pprint(ans)
+            url = ans['response']['image']['url']
+            if download(url) is True:
+                set_background(comun.POTD)
+    except Exception as e:
+        print(e)
+
+
+def download(url):
+    try:
+        r = requests.get(url, stream=True)
+        if r.status_code == 200:
+            if os.path.exists(comun.POTD):
+                md5_old = md5(comun.POTD)
+                tempfilename = tempfile.NamedTemporaryFile().name
+                with open(tempfilename, 'wb') as f:
+                    for chunk in r.iter_content(1024):
+                        f.write(chunk)
+                md5_new = md5(tempfilename)
+                if md5_old == md5_new:
+                    os.remove(tempfilename)
+                else:
+                    os.remove(comun.POTD)
+                    shutil.move(tempfilename, comun.POTD)
+                    return True
+            else:
+                with open(comun.POTD, 'wb') as f:
+                    for chunk in r.iter_content(1024):
+                        f.write(chunk)
+                    return True
+    except Exception as e:
+        print(e)
+    return False
 
 
 def change_wallpaper():
@@ -280,6 +291,8 @@ def change_wallpaper():
         set_powder_wallpaper()
     elif source == 'fstoppers':
         set_fstoppers_wallpaper()
+    elif source == 'desktoppr':
+        set_desktoppr_wallpaper()
 
 
 if __name__ == '__main__':

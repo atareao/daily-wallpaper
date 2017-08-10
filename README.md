@@ -3,8 +3,7 @@
 
 ## Compatibility
 
-* Works with GNOME
-* Not compatible with Mate.
+* Works with GNOME, MATE
 
 ## Download
 

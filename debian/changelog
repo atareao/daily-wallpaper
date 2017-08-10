@@ -1,3 +1,12 @@
+national-geographic-wallpaper (0.4.9-0extras17.04.0) zesty; urgency=medium
+
+  * Added Desktoppr source
+  * Added change wallpaper in background
+  * Added translations to spanish
+  * Check md5 hash in order to change background only if is different
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Thu, 10 Aug 2017 10:39:23 +0200
+
 national-geographic-wallpaper (0.4.5-0extras16.04.0) zesty; urgency=medium
 
   * Added Fstoppers

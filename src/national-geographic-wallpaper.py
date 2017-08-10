@@ -22,15 +22,19 @@
 import gi
 try:
     gi.require_version('Gtk', '3.0')
+    gi.require_version('Gdk', '3.0')
 except Exception as e:
     print(e)
     exit(-1)
 from gi.repository import Gtk
+from gi.repository import Gdk
 import os
 import comun
 import shutil
 from configurator import Configuration
 from ngdownloader import change_wallpaper
+from async import async_function
+from comun import _
 
 COMMENT = '**national-geographic-wallpaper**'
 FILESTART = os.path.join(os.getenv("HOME"), ".config/autostart/\
@@ -55,7 +59,7 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
     def __init__(self):
         Gtk.Dialog.__init__(
             self,
-            'National Geographic Wallpaper',
+            _('National Geographic Wallpaper'),
             None,
             Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
             (Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT,
@@ -71,7 +75,7 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         grid.set_border_width(5)
         self.get_content_area().add(grid)
 
-        label10 = Gtk.Label('Change wallpaper automatically?:')
+        label10 = Gtk.Label(_('Change wallpaper automatically?') + ':')
         label10.set_alignment(0, 0.5)
         grid.add(label10)
 
@@ -82,16 +86,17 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         hbox.pack_start(self.switch, False, False, 0)
         grid.attach(hbox, 1, 0, 1, 1)
 
-        label20 = Gtk.Label('Select backgrounds source:')
+        label20 = Gtk.Label(_('Select backgrounds source') + ':')
         label20.set_alignment(0, 0.5)
         grid.attach(label20, 0, 1, 1, 1)
 
         source_store = Gtk.ListStore(str, str)
-        source_store.append(['National Geographic', 'national-geographic'])
-        source_store.append(['Bing', 'bing'])
-        source_store.append(['GoPro', 'gopro'])
-        source_store.append(['Powder', 'powder'])
-        source_store.append(['Fstoppers', 'fstoppers'])
+        source_store.append([_('National Geographic'), 'national-geographic'])
+        source_store.append([_('Bing'), 'bing'])
+        source_store.append([_('GoPro'), 'gopro'])
+        source_store.append([_('Powder'), 'powder'])
+        source_store.append([_('Fstoppers'), 'fstoppers'])
+        source_store.append([_('Desktoppr'), 'desktoppr'])
         self.combobox_source = Gtk.ComboBox.new()
         self.combobox_source.set_model(source_store)
         cell1 = Gtk.CellRendererText()
@@ -99,7 +104,7 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         self.combobox_source.add_attribute(cell1, 'text', 0)
         grid.attach(self.combobox_source, 1, 1, 1, 1)
 
-        button = Gtk.Button('Change now')
+        button = Gtk.Button(_('Change now'))
         button.connect('clicked', self.button_pressed)
         hbox = Gtk.Box(Gtk.Orientation.HORIZONTAL, 5)
         hbox.pack_start(button, True, False, 0)
@@ -110,8 +115,7 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         self.show_all()
 
     def button_pressed(self, widget):
-        ngw.save_preferences()
-        change_wallpaper()
+        self.change_wallpaper()
 
     def close_application(self, widget, data=None):
         exit(0)
@@ -126,6 +130,20 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         configuration.set(
             'source', get_selected_value_in_combo(self.combobox_source))
         configuration.save()
+
+    def change_wallpaper(self):
+
+        def on_change_wallpaper_done(result, error):
+            self.get_window().set_cursor(None)
+
+        @async_function(on_done=on_change_wallpaper_done)
+        def do_change_wallpaper_in_thread():
+            self.save_preferences()
+            change_wallpaper()
+            return True
+
+        self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.WATCH))
+        do_change_wallpaper_in_thread()
 
 
 if __name__ == '__main__':
