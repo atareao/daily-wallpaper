@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: national-geographic-wallpaper 0.4.5\n"
+"Project-Id-Version: national-geographic-wallpaper 0.4.9\n"
 "Report-Msgid-Bugs-To: lorenzo.carbonell.cerezo@gmail.com\n"
-"POT-Creation-Date: 2017-08-10 10:36+0200\n"
+"POT-Creation-Date: 2017-08-17 07:10+0200\n"
 "PO-Revision-Date: 2017-08-10 10:31+0200\n"
 "Last-Translator: lorenzo <lorenzo.carbonell.cerezo@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -53,10 +53,14 @@ msgstr "Fstoppers"
 msgid "Desktoppr"
 msgstr "Desktoppr"
 
-#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:107
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:100
+msgid "Nasa"
+msgstr "Nasa"
+
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/national-geographic-wallpaper.py:108
 msgid "Change now"
 msgstr "Cambiar fondo ahora"
 
-#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/ngdownloader.py:149
+#: /datos/Sync/Programacion/Python/national-geographic-wallpaper/src/ngdownloader.py:173
 msgid "Photo credit"
 msgstr "Crédito del fondo de pantalla"

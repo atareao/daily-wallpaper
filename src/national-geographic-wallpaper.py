@@ -97,6 +97,7 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         source_store.append([_('Powder'), 'powder'])
         source_store.append([_('Fstoppers'), 'fstoppers'])
         source_store.append([_('Desktoppr'), 'desktoppr'])
+        source_store.append([_('Nasa'), 'nasa'])
         self.combobox_source = Gtk.ComboBox.new()
         self.combobox_source.set_model(source_store)
         cell1 = Gtk.CellRendererText()

@@ -22,28 +22,31 @@
 # Dependencies:
 # python3-cssselect
 
-import requests
-import os
-from lxml.html import fromstring
-from lxml import etree
-import comun
-from gi.repository import Gio
-from gi.repository import GLib
-from configurator import Configuration
-import json
-import tempfile
-import hashlib
 import gi
-import pprint
-import shutil
-from comun import _
 try:
     gi.require_version('Notify', '0.7')
+    gi.require_version('Gio', '2.0')
+    gi.require_version('GLib', '2.0')
 except Exception as e:
     print(e)
     exit(-1)
 from gi.repository import Notify
+from gi.repository import Gio
+from gi.repository import GLib
 from datetime import datetime
+import time
+import requests
+import os
+from lxml.html import fromstring
+from lxml import etree
+import json
+import tempfile
+import hashlib
+import pprint
+import shutil
+import comun
+from configurator import Configuration
+from comun import _
 
 
 URL00 = 'http://www.nationalgeographic.com/photography/photo-of-the-day/\
@@ -56,6 +59,7 @@ URL03 = 'http://www.powder.com/photo-of-the-day/'
 URL04 = 'http://www.vokrugsveta.ru/photo_of_the_day/'
 URL05 = 'https://fstoppers.com/potd'
 URL06 = 'https://api.desktoppr.co/1/wallpapers/random'
+URL07 = 'https://apod.nasa.gov/apod/ap{0}.html'
 
 
 def md5(filename):
@@ -100,6 +104,26 @@ def get_national_geographic_data():
                         caption=current_photo['caption'],
                         credit=current_photo['credit'])
     return None
+
+
+def set_nasa_wallpaper():
+    st = datetime.fromtimestamp(time.time()).strftime('%y%m%d')
+    url = URL07.format(st)
+    r = requests.get(url)
+    if r.status_code == 200:
+        try:
+            parser = etree.HTMLParser(recover=True)
+            html = etree.HTML(r.content, parser)
+            images = html.iter('img')
+            if images is not None:
+                images = list(images)
+                if len(images) > 0:
+                    image_url = images[0].getparent().attrib['href']
+                    image_url = 'https://apod.nasa.gov/' + image_url
+                    if download(image_url) is True:
+                        set_background(comun.POTD)
+        except Exception as e:
+            print(e)
 
 
 def set_fstoppers_wallpaper():
@@ -293,6 +317,8 @@ def change_wallpaper():
         set_fstoppers_wallpaper()
     elif source == 'desktoppr':
         set_desktoppr_wallpaper()
+    elif source == 'nasa':
+        set_nasa_wallpaper()
 
 
 if __name__ == '__main__':
