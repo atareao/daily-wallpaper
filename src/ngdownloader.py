@@ -166,8 +166,8 @@ def set_fstoppers_wallpaper():
 
 
 def notify_photo_caption(title, caption, credit):
-    if len(caption) > 255:
-        caption = caption[:252] + '...'
+    if len(caption) > 100:
+        caption = caption[:97] + '...'
     for m in ['<p>', '</p>', '<br>', '<br />']:
         caption = caption.replace(m, '')
     caption = caption + '\n<i>' + _('Photo credit') + '</i>: ' + credit
