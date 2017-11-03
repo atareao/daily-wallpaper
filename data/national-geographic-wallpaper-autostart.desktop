@@ -1,9 +1,14 @@
 [Desktop Entry]
+Name=National Geographic Wallpaper
 Type=Application
-Exec=/opt/extras.ubuntu.com/national-geographic-wallpaper/share/national-geographic-wallpaper/ngdownloader.py
+Exec=/usr/bin/python3 /opt/extras.ubuntu.com/national-geographic-wallpaper/share/national-geographic-wallpaper/ngdownloader.py
 Hidden=false
 NoDisplay=false
+Terminal=false
+StartupNotify=false
 X-GNOME-Autostart-enabled=true
-X-GNOME-Autostart-Delay=15
+X-GNOME-Autostart-Delay=5
+X-GNOME-Autostart-Phase=Applications
 X-MATE-Autostart-enabled=true
-X-MATE-Autostart-Delay=15
+X-MATE-Autostart-Delay=5
+X-MATE-Autostart-Phase=Applications
