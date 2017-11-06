@@ -166,8 +166,8 @@ def set_fstoppers_wallpaper():
 
 
 def notify_photo_caption(title, caption, credit):
-    if len(caption) > 100:
-        caption = caption[:97] + '...'
+    if len(caption) > 60:
+        caption = description_max(caption, 60)
     for m in ['<p>', '</p>', '<br>', '<br />']:
         caption = caption.replace(m, '')
     caption = caption + '\n<i>' + _('Photo credit') + '</i>: ' + credit
@@ -319,6 +319,24 @@ def change_wallpaper():
         set_desktoppr_wallpaper()
     elif source == 'nasa':
         set_nasa_wallpaper()
+
+
+def description_max(astring, max_length):
+    phrase = ''
+    description = []
+    for chain in astring.split(' '):
+        if len(phrase) == 0:
+            new_phrase = chain
+        else:
+            new_phrase = phrase + ' ' + chain
+        if len(new_phrase) > max_length:
+            description.append(phrase)
+            phrase = chain
+        else:
+            phrase = new_phrase
+    if len(phrase) > 0 and description[-1] != phrase:
+        description.append(phrase)
+    return '\n'.join(description)
 
 
 if __name__ == '__main__':
