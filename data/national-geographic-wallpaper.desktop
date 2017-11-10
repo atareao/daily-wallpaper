@@ -2,8 +2,8 @@
 Name=National Geographic Wallpaper
 GenericName=National Geographic Wallpaper
 Comment=Set automatically National Geographic Photo of the Day
-Exec=/opt/extras.ubuntu.com/national-geographic-wallpaper/share/national-geographic-wallpaper/national-geographic-wallpaper.py
-Icon=/opt/extras.ubuntu.com/national-geographic-wallpaper/share/icons/national-geographic-wallpaper.svg
+Exec=/usr/share/national-geographic-wallpaper/national-geographic-wallpaper.py
+Icon=/usr/share/icons/national-geographic-wallpaper.svg
 Type=Application
 Terminal=false
 StartupNotify=true

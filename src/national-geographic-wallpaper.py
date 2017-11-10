@@ -28,17 +28,16 @@ except Exception as e:
     exit(-1)
 from gi.repository import Gtk
 from gi.repository import Gdk
-import os
 import comun
-import shutil
-from configurator import Configuration
+from autostart import Autostart
+from config import Config
+from timer import Timer
+from service import Service
 from ngdownloader import change_wallpaper
 from async import async_function
 from comun import _
-
-COMMENT = '**national-geographic-wallpaper**'
-FILESTART = os.path.join(os.getenv("HOME"), ".config/autostart/\
-national-geographic-wallpaper-autostart.desktop")
+from subprocess import call
+import shlex
 
 
 def select_value_in_combo(combo, value):
@@ -69,6 +68,11 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         self.set_icon_from_file(comun.ICON)
         self.connect('destroy', self.close_application)
 
+        self.autostart = Autostart()
+        self.config = Config()
+        self.timer = Timer()
+        self.service = Service()
+
         grid = Gtk.Grid()
         grid.set_row_spacing(5)
         grid.set_column_spacing(5)
@@ -80,8 +84,7 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         grid.add(label10)
 
         self.switch = Gtk.Switch()
-        os.path.exists(FILESTART)
-        self.switch.set_active(os.path.exists(FILESTART))
+        self.switch.set_active(self.autostart.get_autostart())
         hbox = Gtk.Box(Gtk.Orientation.HORIZONTAL, 5)
         hbox.pack_start(self.switch, False, False, 0)
         grid.attach(hbox, 1, 0, 1, 1)
@@ -115,6 +118,24 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
 
         self.show_all()
 
+    def set_autostart_activate(self):
+        self.autostart.set_autostart(self.switch.get_active())
+        if self.switch.get_active():
+            self.service.create()
+            self.timer.create()
+            call(shlex.split(
+                'systemctl --user enable national-geographic-wallpaper.timer'))
+            call(shlex.split(
+                'systemctl --user start national-geographic-wallpaper.timer'))
+        else:
+            call(shlex.split(
+                'systemctl --user stop national-geographic-wallpaper.timer'))
+            call(shlex.split(
+                'systemctl --user disable \
+national-geographic-wallpaper.timer'))
+            self.timer.delete()
+            self.service.delete()
+
     def button_pressed(self, widget):
         self.change_wallpaper()
 
@@ -122,15 +143,12 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         exit(0)
 
     def load_preferences(self):
-        configuration = Configuration()
         select_value_in_combo(self.combobox_source,
-                              configuration.get('source'))
+                              self.config.get_source())
 
     def save_preferences(self):
-        configuration = Configuration()
-        configuration.set(
-            'source', get_selected_value_in_combo(self.combobox_source))
-        configuration.save()
+        self.config.set_source(get_selected_value_in_combo(
+            self.combobox_source))
 
     def change_wallpaper(self):
 
@@ -148,18 +166,9 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
 
 
 if __name__ == '__main__':
-    if not os.path.exists(comun.CONFIG_APP_DIR):
-        os.makedirs(comun.CONFIG_APP_DIR)
     ngw = NGW()
     if ngw.run() == Gtk.ResponseType.ACCEPT:
         ngw.hide()
+        ngw.set_autostart_activate()
         ngw.save_preferences()
-        if ngw.switch.get_active():
-            if not os.path.exists(os.path.dirname(FILESTART)):
-                os.makedirs(os.path.dirname(FILESTART))
-            shutil.copyfile(comun.AUTOSTART, FILESTART)
-        else:
-            if os.path.exists(FILESTART):
-                os.remove(FILESTART)
-
     ngw.destroy()

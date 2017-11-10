@@ -45,7 +45,7 @@ import hashlib
 import pprint
 import shutil
 import comun
-from configurator import Configuration
+from config import Config
 from comun import _
 
 
@@ -303,8 +303,8 @@ def download(url):
 
 
 def change_wallpaper():
-    configuration = Configuration()
-    source = configuration.get('source')
+    config = Config()
+    source = config.get_source()
     if source == 'national-geographic':
         set_national_geographic_wallpaper()
     elif source == 'bing':
