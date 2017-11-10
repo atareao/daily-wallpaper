@@ -111,14 +111,12 @@ PARAMS = {
 }
 # check if running from source
 if is_package():
-    ROOTDIR = os.path.join('/opt/extras.ubuntu.com/', APP)
+    ROOTDIR = os.path.join('/usr/', APP)
     APPDIR = os.path.join(ROOTDIR, 'share', APP)
     DICTSDIR = os.path.join(APPDIR, 'dicts')
     LANGDIR = os.path.join(ROOTDIR, 'locale-langpack')
     ICONDIR = os.path.join(ROOTDIR, 'share/icons')
     NGD = os.path.join(APPDIR, 'ngdownloader.py')
-    AUTOSTART = os.path.join(APPDIR,
-                             'national-geographic-wallpaper-autostart.desktop')
 else:
     VERSION = VERSION + '-src'
     ROOTDIR = os.path.dirname(__file__)
@@ -126,8 +124,6 @@ else:
     APPDIR = ROOTDIR
     ICONDIR = os.path.normpath(os.path.join(ROOTDIR, '../data'))
     NGD = os.path.join(APPDIR, 'ngdownloader.py')
-    AUTOSTART = os.path.join(APPDIR,
-                             'national-geographic-wallpaper-autostart.desktop')
 
 #
 ICON = os.path.join(ICONDIR, APP + '.svg')
