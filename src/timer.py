@@ -44,7 +44,7 @@ class Timer(object):
             'Unit': 'national-geographic-wallpaper.service'
         }
         config['Install'] = {
-            'WantedBy': 'national-geographic-wallpaper.service'
+            'WantedBy': 'timers.target'
         }
         with open(self.timer_file, 'w') as configfile:
             config.write(configfile)

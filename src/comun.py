@@ -111,21 +111,19 @@ PARAMS = {
 }
 # check if running from source
 if is_package():
-    ROOTDIR = os.path.join('/usr/', APP)
-    APPDIR = os.path.join(ROOTDIR, 'share', APP)
-    DICTSDIR = os.path.join(APPDIR, 'dicts')
-    LANGDIR = os.path.join(ROOTDIR, 'locale-langpack')
-    ICONDIR = os.path.join(ROOTDIR, 'share/icons')
+    SHAREDIR = os.path.join('/usr', 'share')
+    APPDIR = os.path.join(SHAREDIR, APP)
+    LANGDIR = os.path.join(SHAREDIR, 'locale-langpack')
+    ICONDIR = os.path.join(SHAREDIR, 'icons', 'hicolor', 'scalable', 'apps')
     NGD = os.path.join(APPDIR, 'ngdownloader.py')
 else:
     VERSION = VERSION + '-src'
     ROOTDIR = os.path.dirname(__file__)
-    LANGDIR = os.path.normpath(os.path.join(ROOTDIR, '../template1'))
+    LANGDIR = os.path.normpath(os.path.join(ROOTDIR, '../po'))
     APPDIR = ROOTDIR
     ICONDIR = os.path.normpath(os.path.join(ROOTDIR, '../data'))
     NGD = os.path.join(APPDIR, 'ngdownloader.py')
 
-#
 ICON = os.path.join(ICONDIR, APP + '.svg')
 
 try:

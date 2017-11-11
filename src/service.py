@@ -45,9 +45,6 @@ class Service(object):
             'Environment': 'DISPLAY=:0',
             'ExecStart': '/usr/bin/python3 {0}'.format(EXECBIN)
         }
-        config['Install'] = {
-            'WantedBy': 'basic.target'
-        }
         with open(self.service_file, 'w') as configfile:
             config.write(configfile)
 
