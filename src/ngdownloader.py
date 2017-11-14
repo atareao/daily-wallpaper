@@ -31,8 +31,8 @@ except Exception as e:
     print(e)
     exit(-1)
 from gi.repository import Notify
-from gi.repository import Gio
-from gi.repository import GLib
+# from gi.repository import Gio
+# from gi.repository import GLib
 from datetime import datetime
 import time
 import requests
@@ -72,15 +72,21 @@ def md5(filename):
 
 def set_background(afile=None):
     if os.environ.get("GNOME_DESKTOP_SESSION_ID"):
-        gso = Gio.Settings.new('org.gnome.desktop.background')
+        # gso = Gio.Settings.new('org.gnome.desktop.background')
         if afile and os.path.exists(afile):
-            variant = GLib.Variant('s', 'file://%s' % (afile))
-            gso.set_value('picture-uri', variant)
+            # variant = GLib.Variant('s', 'file://%s' % (afile))
+            # gso.set_value('picture-uri', variant)
+            # gso.apply()
+            os.system("DISPLAY=:0 GSETTINGS_BACKEND=dconf gsettings set \
+org.gnome.desktop.background picture-uri file://'%s'" % afile)
     elif os.environ.get("DESKTOP_SESSION") == "mate":
-        gso = Gio.Settings.new('org.mate.background')
+        # gso = Gio.Settings.new('org.mate.background')
         if afile and os.path.exists(afile):
-            variant = GLib.Variant('s', afile)
-            gso.set_value('picture-filename', variant)
+            # variant = GLib.Variant('s', afile)
+            # gso.set_value('picture-filename', variant)
+            # gso.apply()
+            os.system("DISPLAY=:0 GSETTINGS_BACKEND=dconf gsettings set \
+org.mate.background picture-filename '%s'" % afile)
 
 
 def get_national_geographic_data():
@@ -210,10 +216,13 @@ def set_bing_wallpaper():
 def set_gopro_wallpaper():
     try:
         r = requests.get(URL02)
+        print(r.status_code)
         if r.status_code == 200:
             data = json.loads(r.text)
             url = data['media'][0]['thumbnails']['full']['image']
+            print(url)
             if download(url) is True:
+                print(url)
                 set_background(comun.POTD)
                 notify_photo_caption(data['media'][0]['title'],
                                      data['media'][0]['description'],
@@ -305,6 +314,7 @@ def download(url):
 def change_wallpaper():
     config = Config()
     source = config.get_source()
+    print(source)
     if source == 'national-geographic':
         set_national_geographic_wallpaper()
     elif source == 'bing':

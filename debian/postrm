@@ -24,21 +24,11 @@ case "$1" in
   purge)
     for user in $(cut -d: -f1 /etc/passwd)
     do
+      crontab -u $user -l | grep -v 'NGW_REBOOT' | crontab -u $user -
+      crontab -u $user -l | grep -v 'NGW_AT_ONE' | crontab -u $user -
       config_file="/home/"$user"/.config/national-geographic-wallpaper/national-geographic-wallpaper.conf"
       if [ -f $config_file ]; then
         rm $config_file
-      fi
-      desktop_file="/home/"$user"/.config/autostart/national-geographic-wallpaper.desktop"
-      if [ -f $desktop_file ]; then
-        rm $desktop_file
-      fi
-      service_file="/home/"$user"/.config/systemd/user/national-geographic-wallpaper.service"
-      if [ -f $service_file ]; then
-        rm $service_file
-      fi
-      timer_file="/home/"$user"/.config/systemd/user/national-geographic-wallpaper.timer"
-      if [ -f $timer_file ]; then
-        rm $timer_file
       fi
     done
   ;;
@@ -46,18 +36,8 @@ case "$1" in
   remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
     for user in $(cut -d: -f1 /etc/passwd)
     do
-      desktop_file="/home/"$user"/.config/autostart/national-geographic-wallpaper.desktop"
-      if [ -f $desktop_file ]; then
-        rm $desktop_file
-      fi
-      service_file="/home/"$user"/.config/systemd/user/national-geographic-wallpaper.service"
-      if [ -f $service_file ]; then
-        rm $service_file
-      fi
-      timer_file="/home/"$user"/.config/systemd/user/national-geographic-wallpaper.timer"
-      if [ -f $timer_file ]; then
-        rm $timer_file
-      fi
+      crontab -u $user -l | grep -v 'NGW_REBOOT' | crontab -u $user -
+      crontab -u $user -l | grep -v 'NGW_AT_ONE' | crontab -u $user -
     done
   ;;
 

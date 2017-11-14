@@ -29,10 +29,8 @@ except Exception as e:
 from gi.repository import Gtk
 from gi.repository import Gdk
 import comun
-from autostart import Autostart
 from config import Config
-from timer import Timer
-from service import Service
+from croni import Croni
 from ngdownloader import change_wallpaper
 from async import async_function
 from comun import _
@@ -68,10 +66,8 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         self.set_icon_from_file(comun.ICON)
         self.connect('destroy', self.close_application)
 
-        self.autostart = Autostart()
         self.config = Config()
-        self.timer = Timer()
-        self.service = Service()
+        self.croni = Croni()
 
         grid = Gtk.Grid()
         grid.set_row_spacing(5)
@@ -84,7 +80,7 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         grid.add(label10)
 
         self.switch = Gtk.Switch()
-        self.switch.set_active(self.autostart.get_autostart())
+        self.switch.set_active(self.croni.is_enabled())
         hbox = Gtk.Box(Gtk.Orientation.HORIZONTAL, 5)
         hbox.pack_start(self.switch, False, False, 0)
         grid.attach(hbox, 1, 0, 1, 1)
@@ -119,22 +115,10 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
         self.show_all()
 
     def set_autostart_activate(self):
-        self.autostart.set_autostart(self.switch.get_active())
         if self.switch.get_active():
-            self.service.create()
-            self.timer.create()
-            call(shlex.split(
-                'systemctl --user enable national-geographic-wallpaper.timer'))
-            call(shlex.split(
-                'systemctl --user start national-geographic-wallpaper.timer'))
+            self.croni.set_jobs()
         else:
-            call(shlex.split(
-                'systemctl --user stop national-geographic-wallpaper.timer'))
-            call(shlex.split(
-                'systemctl --user disable \
-national-geographic-wallpaper.timer'))
-            self.timer.delete()
-            self.service.delete()
+            self.croni.unset_jobs()
 
     def button_pressed(self, widget):
         self.change_wallpaper()
