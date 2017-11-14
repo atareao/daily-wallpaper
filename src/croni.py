@@ -23,8 +23,9 @@ import os
 from crontab import CronTab
 
 
-PARAMS = 'DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%s/bus \
+PARAMS = 'DISPLAY=:0;DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%s/bus;\
 GSETTINGS_BACKEND=dconf'
+SLEEP = 'sleep 5'
 EXEC = '/usr/bin/python3'
 SCRIPT = '/usr/share/national-geographic-wallpaper/ngdownloader.py'
 GSET_GNOME = 'gsettings set org.gnome.desktop.background picture-uri \
@@ -45,11 +46,11 @@ class Croni(object):
         else:
             gset = None
         if gset is not None:
-            self.command_1 = '{0} {1} {2}'.format(params, EXEC, SCRIPT)
-            self.command_2 = '{0} {1}'.format(params, gset)
+            self.command = '{0} && {1} && {2} {3} && {4}'.format(params, SLEEP,
+                                                                 EXEC, SCRIPT,
+                                                                 gset)
         else:
-            self.command_1 = None
-            self.command_2 = None
+            self.command = None
 
     def __set_job(self, command, comment):
         if command is None:
@@ -63,10 +64,8 @@ class Croni(object):
 
     def set_jobs(self):
         self.unset_jobs()
-        self.__set_job(self.command_1, 'NGW_REBOOT')
-        self.__set_job(self.command_2, 'NGW_REBOOT')
-        self.__set_job(self.command_1, 'NGW_AT_ONE')
-        self.__set_job(self.command_2, 'NGW_AT_ONE')
+        self.__set_job(self.command, 'NGW_REBOOT')
+        self.__set_job(self.command, 'NGW_AT_ONE')
         self.cron.write()
 
     def unset_jobs(self):
