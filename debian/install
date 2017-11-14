@@ -1,3 +1,9 @@
 src/*.py /usr/share/national-geographic-wallpaper
 data/national-geographic-wallpaper.svg /usr/share/icons/hicolor/scalable/apps/
+data/16x16/national-geographic-wallpaper.png /usr/share/icons/hicolor/16x16/apps/
+data/22x22/national-geographic-wallpaper.png /usr/share/icons/hicolor/22x22/apps/
+data/24x24/national-geographic-wallpaper.png /usr/share/icons/hicolor/24x24/apps/
+data/32x32/national-geographic-wallpaper.png /usr/share/icons/hicolor/32x32/apps/
+data/48x48/national-geographic-wallpaper.png /usr/share/icons/hicolor/48x48/apps/
+data/256x256/national-geographic-wallpaper.png /usr/share/icons/hicolor/256x256/apps/
 data/national-geographic-wallpaper.desktop /usr/share/applications
