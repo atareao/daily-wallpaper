@@ -23,8 +23,9 @@ import os
 from crontab import CronTab
 
 
-PARAMS = 'DISPLAY=:0;DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%s/bus;\
-GSETTINGS_BACKEND=dconf'
+PARAMS = 'export DISPLAY=:0;\
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%s/bus;\
+export GSETTINGS_BACKEND=dconf'
 SLEEP = 'sleep 5'
 EXEC = '/usr/bin/python3'
 SCRIPT = '/usr/share/national-geographic-wallpaper/ngdownloader.py'
@@ -46,9 +47,8 @@ class Croni(object):
         else:
             gset = None
         if gset is not None:
-            self.command = '{0} && {1} && {2} {3} && {4}'.format(params, SLEEP,
-                                                                 EXEC, SCRIPT,
-                                                                 gset)
+            self.command = '{0};{1};{2} {3} && {4}'.format(SLEEP, params,
+                                                           EXEC, SCRIPT, gset)
         else:
             self.command = None
 

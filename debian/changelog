@@ -1,10 +1,10 @@
-national-geographic-wallpaper (0.5.9-0extras17.10.9) artful; urgency=medium
+national-geographic-wallpaper (0.5.9-0extras17.10.10) artful; urgency=medium
 
   * cron
   * PNG
   * sleep 5
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 14 Nov 2017 10:54:51 +0100
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 14 Nov 2017 11:36:34 +0100
 
 national-geographic-wallpaper (0.5.9-0extras17.10.5) artful; urgency=medium
 
