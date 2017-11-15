@@ -1,3 +1,9 @@
+national-geographic-wallpaper (0.5.9-0extras17.10.11) artful; urgency=medium
+
+  * cron + autostart
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Wed, 15 Nov 2017 17:15:16 +0100
+
 national-geographic-wallpaper (0.5.9-0extras17.10.10) artful; urgency=medium
 
   * cron

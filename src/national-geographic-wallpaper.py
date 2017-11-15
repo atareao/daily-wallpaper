@@ -31,11 +31,10 @@ from gi.repository import Gdk
 import comun
 from config import Config
 from croni import Croni
+from autostart import Autostart
 from ngdownloader import change_wallpaper
 from async import async_function
 from comun import _
-from subprocess import call
-import shlex
 
 
 def select_value_in_combo(combo, value):
@@ -68,6 +67,7 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
 
         self.config = Config()
         self.croni = Croni()
+        self.autostart = Autostart()
 
         grid = Gtk.Grid()
         grid.set_row_spacing(5)
@@ -117,8 +117,13 @@ class NGW(Gtk.Dialog):  # needs GTK, Python, Webkit-GTK
     def set_autostart_activate(self):
         if self.switch.get_active():
             self.croni.set_jobs()
+            self.autostart.set_autostart(True)
+            self.get_window().set_cursor(Gdk.Cursor(Gdk.CursorType.WATCH))
+            change_wallpaper()
+            self.get_window().set_cursor(None)
         else:
             self.croni.unset_jobs()
+            self.autostart.set_autostart(False)
 
     def button_pressed(self, widget):
         self.change_wallpaper()

@@ -52,33 +52,26 @@ class Croni(object):
         else:
             self.command = None
 
-    def __set_job(self, command, comment):
-        if command is None:
-            return
-        job = self.cron.new(command=command, comment=comment)
-        if comment == 'NGW_REBOOT':
-            job.every_reboot()
-        else:
-            job.hour.on(1)
-        job.enable()
-
     def set_jobs(self):
         self.unset_jobs()
-        self.__set_job(self.command, 'NGW_REBOOT')
-        self.__set_job(self.command, 'NGW_AT_ONE')
-        self.cron.write()
+        if self.command is not None:
+            job = self.cron.new(command=self.command,
+                                comment='NGW_EVERY_TWELVE')
+            job.hour.every(12)
+            job.enable()
+            self.cron.write()
 
     def unset_jobs(self):
-        self.cron.remove_all(comment='NGW_REBOOT')
-        self.cron.remove_all(comment='NGW_AT_ONE')
+        self.cron.remove_all(comment='NGW_EVERY_TWELVE')
         self.cron.write()
 
     def is_enabled(self):
-        for job in self.cron.find_comment('NGW_REBOOT'):
-            return job.is_enabled()
+        for job in self.cron.find_comment('NGW_EVERY_TWELVE'):
+            if job.is_enabled():
+                return True
         return False
 
 
 if __name__ == '__main__':
     croni = Croni()
-    croni.set_jobs()
+    print(croni.is_enabled())
