@@ -32,14 +32,14 @@ SCRIPT = '/usr/share/national-geographic-wallpaper/ngdownloader.py'
 GSET_GNOME = 'gsettings set org.gnome.desktop.background picture-uri \
 "file://%s"'
 GSET_MATE = 'gsettings set org.mate.background picture-filename "%s"'
-FILE = '/home/%s/.config/national-geographic-wallpaper/potd.jpg'
+FILE = '.config/national-geographic-wallpaper/potd.jpg'
 
 
 class Croni(object):
     def __init__(self):
         self.cron = CronTab(user=True)
         params = PARAMS % os.getegid()
-        filename = FILE % os.getlogin()
+        filename = os.path.join(os.path.expanduser('~'), FILE)
         if os.environ.get("GNOME_DESKTOP_SESSION_ID"):
             gset = GSET_GNOME % filename
         elif os.environ.get("DESKTOP_SESSION") == "mate":
