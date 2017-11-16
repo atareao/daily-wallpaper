@@ -38,7 +38,7 @@ FILE = '.config/national-geographic-wallpaper/potd.jpg'
 class Croni(object):
     def __init__(self):
         self.cron = CronTab(user=True)
-        params = PARAMS % os.getegid()
+        params = PARAMS % os.getuid()
         filename = os.path.join(os.path.expanduser('~'), FILE)
         if os.environ.get("GNOME_DESKTOP_SESSION_ID"):
             gset = GSET_GNOME % filename
