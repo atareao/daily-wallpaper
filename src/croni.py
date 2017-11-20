@@ -21,7 +21,7 @@
 
 import os
 from crontab import CronTab
-
+from comun import get_desktop_environment
 
 PARAMS = 'export DISPLAY=:0;\
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%s/bus;\
@@ -32,6 +32,8 @@ SCRIPT = '/usr/share/national-geographic-wallpaper/ngdownloader.py'
 GSET_GNOME = 'gsettings set org.gnome.desktop.background picture-uri \
 "file://%s"'
 GSET_MATE = 'gsettings set org.mate.background picture-filename "%s"'
+GSET_CINNAMON = 'gsettings set org.cinnamon.background picture-filename \
+"file://%s"'
 FILE = '.config/national-geographic-wallpaper/potd.jpg'
 
 
@@ -40,10 +42,14 @@ class Croni(object):
         self.cron = CronTab(user=True)
         params = PARAMS % os.getuid()
         filename = os.path.join(os.path.expanduser('~'), FILE)
-        if os.environ.get("GNOME_DESKTOP_SESSION_ID"):
+        desktop_environment = get_desktop_environment()
+        if desktop_environment == 'gnome' or \
+                get_desktop_environment() == 'unity':
             gset = GSET_GNOME % filename
-        elif os.environ.get("DESKTOP_SESSION") == "mate":
+        elif desktop_environment == "mate":
             gset = GSET_MATE % filename
+        elif desktop_environment == "cinnamon":
+            gset = GSET_CINNAMON % filename
         else:
             gset = None
         if gset is not None:

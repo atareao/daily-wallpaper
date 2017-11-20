@@ -1,3 +1,9 @@
+national-geographic-wallpaper (0.6.0-0extras17.10.0) artful; urgency=medium
+
+  * Added cinnamon as supported desktop
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 20 Nov 2017 13:20:40 +0100
+
 national-geographic-wallpaper (0.5.9-0extras17.10.12) artful; urgency=medium
 
   * cron + autostart

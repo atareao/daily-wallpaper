@@ -46,6 +46,7 @@ import pprint
 import shutil
 import comun
 from config import Config
+from comun import get_desktop_environment
 from comun import _
 
 
@@ -71,22 +72,19 @@ def md5(filename):
 
 
 def set_background(afile=None):
-    if os.environ.get("GNOME_DESKTOP_SESSION_ID"):
-        # gso = Gio.Settings.new('org.gnome.desktop.background')
+    desktop_environment = get_desktop_environment()
+    if desktop_environment == 'gnome' or desktop_environment == 'unity':
         if afile and os.path.exists(afile):
-            # variant = GLib.Variant('s', 'file://%s' % (afile))
-            # gso.set_value('picture-uri', variant)
-            # gso.apply()
             os.system("DISPLAY=:0 GSETTINGS_BACKEND=dconf gsettings set \
 org.gnome.desktop.background picture-uri file://'%s'" % afile)
-    elif os.environ.get("DESKTOP_SESSION") == "mate":
-        # gso = Gio.Settings.new('org.mate.background')
+    elif desktop_environment == "mate":
         if afile and os.path.exists(afile):
-            # variant = GLib.Variant('s', afile)
-            # gso.set_value('picture-filename', variant)
-            # gso.apply()
             os.system("DISPLAY=:0 GSETTINGS_BACKEND=dconf gsettings set \
 org.mate.background picture-filename '%s'" % afile)
+    elif desktop_environment == "cinnamon":
+        if afile and os.path.exists(afile):
+            os.system("DISPLAY=:0 GSETTINGS_BACKEND=dconf gsettings set \
+org.cinnamon.background picture-filename file://'%s'" % afile)
 
 
 def get_national_geographic_data():
