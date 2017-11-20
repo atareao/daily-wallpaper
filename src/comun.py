@@ -61,8 +61,8 @@ def get_desktop_environment():
     if desktop_session is not None:
         desktop_session = desktop_session.lower()
         if desktop_session in ["gnome", "unity", "cinnamon", "mate",
-                               "xfce4", "lxde", "fluxbox", "blackbox",
-                               "openbox", "icewm", "jwm",
+                               "budgie-desktop", "xfce4", "lxde", "fluxbox",
+                               "blackbox", "openbox", "icewm", "jwm",
                                "afterstep", "trinity", "kde"]:
             return desktop_session
         # ## Special cases ##

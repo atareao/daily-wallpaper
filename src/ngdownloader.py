@@ -73,7 +73,8 @@ def md5(filename):
 
 def set_background(afile=None):
     desktop_environment = get_desktop_environment()
-    if desktop_environment == 'gnome' or desktop_environment == 'unity':
+    if desktop_environment == 'gnome' or desktop_environment == 'unity' or \
+            desktop_environment == 'budgie-desktop':
         if afile and os.path.exists(afile):
             os.system("DISPLAY=:0 GSETTINGS_BACKEND=dconf gsettings set \
 org.gnome.desktop.background picture-uri file://'%s'" % afile)

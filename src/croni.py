@@ -44,7 +44,8 @@ class Croni(object):
         filename = os.path.join(os.path.expanduser('~'), FILE)
         desktop_environment = get_desktop_environment()
         if desktop_environment == 'gnome' or \
-                get_desktop_environment() == 'unity':
+                desktop_environment == 'unity' or \
+                desktop_environment == 'budgie-desktop':
             gset = GSET_GNOME % filename
         elif desktop_environment == "mate":
             gset = GSET_MATE % filename
