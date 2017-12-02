@@ -1,9 +1,9 @@
-national-geographic-wallpaper (0.6.1-0extras17.10.0) artful; urgency=medium
+national-geographic-wallpaper (0.6.1-0extras17.10.2) artful; urgency=medium
 
   * Added cinnamon as supported desktop
   * Added Budgie as supported desktop
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 20 Nov 2017 13:32:36 +0100
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 28 Nov 2017 12:41:03 +0100
 
 national-geographic-wallpaper (0.5.9-0extras17.10.12) artful; urgency=medium
 

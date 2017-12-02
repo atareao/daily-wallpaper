@@ -32,7 +32,7 @@ SCRIPT = '/usr/share/national-geographic-wallpaper/ngdownloader.py'
 GSET_GNOME = 'gsettings set org.gnome.desktop.background picture-uri \
 "file://%s"'
 GSET_MATE = 'gsettings set org.mate.background picture-filename "%s"'
-GSET_CINNAMON = 'gsettings set org.cinnamon.background picture-filename \
+GSET_CINNAMON = 'gsettings set org.cinnamon.desktop.background picture-uri \
 "file://%s"'
 FILE = '.config/national-geographic-wallpaper/potd.jpg'
 

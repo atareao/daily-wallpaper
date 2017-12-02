@@ -85,7 +85,7 @@ org.mate.background picture-filename '%s'" % afile)
     elif desktop_environment == "cinnamon":
         if afile and os.path.exists(afile):
             os.system("DISPLAY=:0 GSETTINGS_BACKEND=dconf gsettings set \
-org.cinnamon.background picture-filename file://'%s'" % afile)
+org.cinnamon.desktop.background picture-uri file://'%s'" % afile)
 
 
 def get_national_geographic_data():

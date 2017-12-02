@@ -50,7 +50,7 @@ def is_running(process):
         print(e)
         s = subprocess.Popen(["tasklist", "/v"], stdout=subprocess.PIPE)
     for x in s.stdout:
-        if re.search(process, x):
+        if re.search(process, x.decode()):
             return True
     return False
 
