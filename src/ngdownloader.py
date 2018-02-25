@@ -61,7 +61,7 @@ URL04 = 'http://www.vokrugsveta.ru/photo_of_the_day/'
 URL05 = 'https://fstoppers.com/potd'
 URL06 = 'https://api.desktoppr.co/1/wallpapers/random'
 URL07 = 'https://apod.nasa.gov/apod/ap{0}.html'
-
+URL08 = 'https://alpha.wallhaven.cc/random'
 
 def md5(filename):
     hash_md5 = hashlib.md5()
@@ -247,6 +247,23 @@ def set_powder_wallpaper():
         print(e)
 
 
+def set_wallhaven_wallpaper():
+    try:
+        r = requests.get(URL08)
+        if r.status_code == 200:
+            doc = fromstring(r.text)
+            results = doc.cssselect('figure')
+            if len(results) > 0:
+                wallpaper_image = 'wallhaven-{0}.jpg'.format(
+                    results[0].get('data-wallpaper-id'))
+                url = 'https://wallpapers.wallhaven.cc/wallpapers/\
+full/{0}'.format(wallpaper_image)
+                if download(url) is True:
+                    set_background(comun.POTD)
+    except Exception as e:
+        print(e)
+
+
 def set_vokrugsveta_wallpaper():
     try:
         r = requests.get(URL04)
@@ -328,6 +345,8 @@ def change_wallpaper():
         set_desktoppr_wallpaper()
     elif source == 'nasa':
         set_nasa_wallpaper()
+    elif source == 'wallhaven':
+        set_wallhaven_wallpaper()
 
 
 def description_max(astring, max_length):
@@ -349,5 +368,6 @@ def description_max(astring, max_length):
 
 
 if __name__ == '__main__':
-    change_wallpaper()
+    # change_wallpaper()
+    set_wallhaven_wallpaper()
     exit(0)
