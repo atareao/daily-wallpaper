@@ -39,6 +39,7 @@ import requests
 import os
 from lxml.html import fromstring
 from lxml import etree
+from random import randint
 import json
 import tempfile
 import hashlib
@@ -62,6 +63,8 @@ URL05 = 'https://fstoppers.com/potd'
 URL06 = 'https://api.desktoppr.co/1/wallpapers/random'
 URL07 = 'https://apod.nasa.gov/apod/ap{0}.html'
 URL08 = 'https://alpha.wallhaven.cc/random'
+URL09 = 'https://www.socwall.com/'
+
 
 def md5(filename):
     hash_md5 = hashlib.md5()
@@ -300,6 +303,38 @@ def set_desktoppr_wallpaper():
         print(e)
 
 
+def set_social_wallpapering():
+    try:
+        r = requests.get(URL09)
+        if r.status_code == 200:
+            doc = fromstring(r.text)
+            results = doc.cssselect('li.pageNumber a')
+            page = randint(1, int(results[-1].text))
+            new_url = 'https://www.socwall.com/wallpapers/page:%s/' % page
+            r = requests.get(new_url)
+            if r.status_code == 200:
+                doc = fromstring(r.text)
+                results = doc.cssselect(
+                    'ul.wallpaperList li.wallpaper a.image')
+                if len(results) > 0:
+                    image = randint(0, len(results) - 1)
+                    url = 'https://www.socwall.com'
+                    url += results[image].attrib['href']
+                    r = requests.get(url)
+                    if r.status_code == 200:
+                        doc = fromstring(r.text)
+                        results = doc.cssselect(
+                            'div.wallpaperProfile div.wallpaper \
+    a.wallpaperImageLink')
+                        if len(results) > 0:
+                            url = 'https://www.socwall.com'
+                            url += results[0].attrib['href']
+                            if download(url) is True:
+                                set_background(comun.POTD)
+    except Exception as e:
+        print(e)
+
+
 def download(url):
     try:
         r = requests.get(url, stream=True)
@@ -347,6 +382,8 @@ def change_wallpaper():
         set_nasa_wallpaper()
     elif source == 'wallhaven':
         set_wallhaven_wallpaper()
+    elif source == 'social-wallpapering':
+        set_wallhaven_wallpaper()
 
 
 def description_max(astring, max_length):
@@ -369,5 +406,5 @@ def description_max(astring, max_length):
 
 if __name__ == '__main__':
     # change_wallpaper()
-    set_wallhaven_wallpaper()
+    set_social_wallpapering()
     exit(0)
