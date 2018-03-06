@@ -405,6 +405,6 @@ def description_max(astring, max_length):
 
 
 if __name__ == '__main__':
-    # change_wallpaper()
-    set_social_wallpapering()
+    change_wallpaper()
+    # set_social_wallpapering()
     exit(0)
