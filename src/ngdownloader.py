@@ -383,7 +383,7 @@ def change_wallpaper():
     elif source == 'wallhaven':
         set_wallhaven_wallpaper()
     elif source == 'social-wallpapering':
-        set_wallhaven_wallpaper()
+        set_social_wallpapering()
 
 
 def description_max(astring, max_length):
