@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# This file is part of national-geographic-background
+# This file is part of national-geographic-wallpaper
 #
-# Copyright (C) 2017
+# Copyright (C) 2017-2018
 # Lorenzo Carbonell Cerezo <lorenzo.carbonell.cerezo@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify

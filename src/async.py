@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# async.py
+# This file is part of national-geographic-wallpaper
 #
-# This file is part of uPodcatcher
-#
-# Copyright (C) 2014
+# Copyright (C) 2017-2018
 # Lorenzo Carbonell Cerezo <lorenzo.carbonell.cerezo@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -20,6 +18,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 import gi
 try:
     gi.require_version('GLib', '2.0')

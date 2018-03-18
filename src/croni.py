@@ -3,7 +3,7 @@
 #
 # This file is part of national-geographic-wallpaper
 #
-# Copyright (C) 2017
+# Copyright (C) 2017-2018
 # Lorenzo Carbonell Cerezo <lorenzo.carbonell.cerezo@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
@@ -26,7 +26,6 @@ from comun import get_desktop_environment
 PARAMS = 'export DISPLAY=:0;\
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%s/bus;\
 export GSETTINGS_BACKEND=dconf'
-SLEEP = 'sleep 5'
 EXEC = '/usr/bin/python3'
 SCRIPT = '/usr/share/national-geographic-wallpaper/ngdownloader.py'
 GSET_GNOME = 'gsettings set org.gnome.desktop.background picture-uri \
@@ -35,6 +34,7 @@ GSET_MATE = 'gsettings set org.mate.background picture-filename "%s"'
 GSET_CINNAMON = 'gsettings set org.cinnamon.desktop.background picture-uri \
 "file://%s"'
 FILE = '.config/national-geographic-wallpaper/potd.jpg'
+NO_OUTPUT = '>/dev/null 2>&1'
 
 
 class Croni(object):
@@ -54,8 +54,8 @@ class Croni(object):
         else:
             gset = None
         if gset is not None:
-            self.command = '{0};{1};{2} {3} && {4}'.format(SLEEP, params,
-                                                           EXEC, SCRIPT, gset)
+            self.command = '{0};{1} {2} {4} && {3} {4}'.format(
+                params, EXEC, SCRIPT, gset, NO_OUTPUT)
         else:
             self.command = None
 
