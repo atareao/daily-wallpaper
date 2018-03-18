@@ -1,9 +1,9 @@
-national-geographic-wallpaper (0.6.3-0extras17.10.3) xenial; urgency=medium
+national-geographic-wallpaper (0.6.3-0extras17.10.4) xenial; urgency=medium
 
   * Added Social Wallpapering
   * Fixed a bug with notifications in Ubuntu 18.04
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 18 Mar 2018 12:05:25 +0100
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 18 Mar 2018 12:29:09 +0100
 
 national-geographic-wallpaper (0.6.2-0extras17.10.0) xenial; urgency=medium
 
