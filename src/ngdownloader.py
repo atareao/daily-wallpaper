@@ -179,11 +179,14 @@ def notify_photo_caption(title, caption, credit):
     for m in ['<p>', '</p>', '<br>', '<br />']:
         caption = caption.replace(m, '')
     caption = caption + '\n<i>' + _('Photo credit') + '</i>: ' + credit
-    Notify.init(title)
-    info = Notify.Notification.new(title, caption, 'dialog-information')
-    info.set_timeout(Notify.EXPIRES_NEVER)
-    info.set_urgency(Notify.Urgency.CRITICAL)  # Notification stays longer
-    info.show()
+    try:
+        Notify.init(title)
+        info = Notify.Notification.new(title, caption, 'dialog-information')
+        info.set_timeout(Notify.EXPIRES_NEVER)
+        info.set_urgency(Notify.Urgency.CRITICAL)  # Notification stays longer
+        info.show()
+    except Exception as e:
+        print(e)
 
 
 def set_national_geographic_wallpaper():
