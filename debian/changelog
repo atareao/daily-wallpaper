@@ -1,3 +1,9 @@
+national-geographic-wallpaper (0.6.4-0extras18.04.0) bionic; urgency=medium
+
+  * Updated data for National Geographic Photo of the day
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 25 Aug 2018 12:17:47 +0200
+
 national-geographic-wallpaper (0.6.3-0extras17.10.4) xenial; urgency=medium
 
   * Added Social Wallpapering

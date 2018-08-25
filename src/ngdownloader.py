@@ -36,6 +36,7 @@ from gi.repository import Notify
 from datetime import datetime
 import time
 import requests
+import re
 import os
 from lxml.html import fromstring
 from lxml import etree
@@ -51,8 +52,7 @@ from comun import get_desktop_environment
 from comun import _
 
 
-URL00 = 'http://www.nationalgeographic.com/photography/photo-of-the-day/\
-_jcr_content/.gallery.'
+URL00 = 'https://www.nationalgeographic.com/photography/photo-of-the-day'
 URL01 = 'http://www.bing.com/HPImageArchive.aspx?\
 format=xml&idx=0&n=1&mkt=en-ww'
 URL02 = 'https://api.gopro.com/v2/channels/feed/playlists/\
@@ -190,14 +190,25 @@ def notify_photo_caption(title, caption, credit):
 
 
 def set_national_geographic_wallpaper():
-    data = get_national_geographic_data()
-    if data:
-        url = data['url']
-        if download(url) is True:
+    r = requests.get(URL00)
+    if r.status_code == 200:
+        content = r.content.decode()
+        afile = open("contenido.html", "w")
+        afile.write(content)
+        afile.close
+        m = re.findall('<meta property="og:image" content="([^"]*)"', content)
+        url = m[0] if(len(m)) > 0 else None
+        if url is not None and download(url) is True:
             set_background(comun.POTD)
-            notify_photo_caption(data['title'],
-                                 data['caption'],
-                                 data['credit'])
+            m = re.findall('<meta property="og:title" content="([^"]*)"/>', content)
+            title = m[0] if len(m) > 0 else ''
+            m = re.findall('<meta property="og:description" content="([^"]*)"/>', content)
+            caption = m[0] if len(m) > 0 else ''
+            m = re.findall('<meta name="twitter:creator" content="([^"]*)">', content)
+            credit = m[0] if len(m) > 0 else ''
+            notify_photo_caption(title,
+                                 caption,
+                                 credit)
 
 
 def set_bing_wallpaper():
@@ -408,6 +419,7 @@ def description_max(astring, max_length):
 
 
 if __name__ == '__main__':
-    change_wallpaper()
+    #change_wallpaper()
     # set_social_wallpapering()
+    set_national_geographic_wallpaper()
     exit(0)
