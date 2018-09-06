@@ -193,9 +193,6 @@ def set_national_geographic_wallpaper():
     r = requests.get(URL00)
     if r.status_code == 200:
         content = r.content.decode()
-        afile = open("contenido.html", "w")
-        afile.write(content)
-        afile.close
         m = re.findall('<meta property="og:image" content="([^"]*)"', content)
         url = m[0] if(len(m)) > 0 else None
         if url is not None and download(url) is True:
@@ -419,7 +416,7 @@ def description_max(astring, max_length):
 
 
 if __name__ == '__main__':
-    #change_wallpaper()
+    change_wallpaper()
     # set_social_wallpapering()
-    set_national_geographic_wallpaper()
+    # set_national_geographic_wallpaper()
     exit(0)
