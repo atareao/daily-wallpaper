@@ -1,3 +1,9 @@
+national-geographic-wallpaper (0.6.6-0extras18.04.0) bionic; urgency=medium
+
+  * Added update on reboot
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 14 Oct 2018 09:57:58 +0200
+
 national-geographic-wallpaper (0.6.5-0extras18.04.0) bionic; urgency=medium
 
   *  Fixed a bug: application is creating a weird html file #15 
