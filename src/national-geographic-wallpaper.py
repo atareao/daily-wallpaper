@@ -33,7 +33,7 @@ from config import Config
 from croni import Croni
 from autostart import Autostart
 from ngdownloader import change_wallpaper
-from async import async_function
+from fsync import async_function
 from comun import _
 
 

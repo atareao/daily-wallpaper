@@ -54,9 +54,8 @@ class Croni(object):
         else:
             gset = None
         if gset is not None:
-            self.command = '{0};{1} {2} {4} && {3} {4}'.format(
+            self.command = 'sleep 20;{0};{1} {2} {4} && {3} {4}'.format(
                 params, EXEC, SCRIPT, gset, NO_OUTPUT)
-            self.command2 = 'sleep 20;' + self.command
         else:
             self.command = None
 
@@ -67,10 +66,6 @@ class Croni(object):
                                 comment='NGW_EVERY_TWELVE')
             job.hour.every(12)
             job.enable()
-            job2 = self.cron.new(command=self.command2,
-                                 comment='NGW_EVERY_TWELVE')
-            job2.every_reboot()
-            job2.enable()
             self.cron.write()
 
     def unset_jobs(self):
