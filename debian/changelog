@@ -1,9 +1,9 @@
-national-geographic-wallpaper (0.6.6-0extras18.04.2) bionic; urgency=medium
+national-geographic-wallpaper (0.6.6-0extras18.04.3) disco; urgency=medium
 
   * Added update on reboot
   * Fixed a bug with sync in Disco Dingo
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 16 Jul 2019 06:34:42 +0200
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 22 Jul 2019 08:08:30 +0200
 
 national-geographic-wallpaper (0.6.5-0extras18.04.0) bionic; urgency=medium
 
