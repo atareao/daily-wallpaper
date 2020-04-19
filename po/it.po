@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: national-geographic-wallpaper - 0.6.6-0extras18.04.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-18 21:08+0200\n"
-"PO-Revision-Date: 2020-04-18 21:08+0200\n"
-"Last-Translator: Lorenzo <lorenzo.carbonell.cerezo@gmail.com>\n"
+"PO-Revision-Date: 2020-04-19 14:00+0200\n"
+"Last-Translator: Massimiliano Arione <garakkio@gmail.com>\n"
 "Language-Team: Italian\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -19,56 +19,56 @@ msgstr ""
 
 #: src/national-geographic-wallpaper.py:58
 msgid "National Geographic Wallpaper"
-msgstr ""
+msgstr "Sfondo National Geographic"
 
 #: src/national-geographic-wallpaper.py:78
 msgid "Change wallpaper automatically?"
-msgstr ""
+msgstr "Cambiare sfondo automaticamente?"
 
 #: src/national-geographic-wallpaper.py:88
 msgid "Select backgrounds source"
-msgstr ""
+msgstr "Selezionare sorgente per gli sfondi"
 
 #: src/national-geographic-wallpaper.py:93
 msgid "National Geographic"
-msgstr ""
+msgstr "National Geographic"
 
 #: src/national-geographic-wallpaper.py:94
 msgid "Bing"
-msgstr ""
+msgstr "Bing"
 
 #: src/national-geographic-wallpaper.py:95
 msgid "GoPro"
-msgstr ""
+msgstr "GoPro"
 
 #: src/national-geographic-wallpaper.py:96
 msgid "Powder"
-msgstr ""
+msgstr "Powder"
 
 #: src/national-geographic-wallpaper.py:97
 msgid "Fstoppers"
-msgstr ""
+msgstr "Fstoppers"
 
 #: src/national-geographic-wallpaper.py:98
 msgid "Desktoppr"
-msgstr ""
+msgstr "Desktoppr"
 
 #: src/national-geographic-wallpaper.py:99
 msgid "Nasa"
-msgstr ""
+msgstr "Nasa"
 
 #: src/national-geographic-wallpaper.py:100
 msgid "Wallhaven"
-msgstr ""
+msgstr "Wallhaven"
 
 #: src/national-geographic-wallpaper.py:101
 msgid "Social Wallpapering"
-msgstr ""
+msgstr "Social Wallpapering"
 
 #: src/national-geographic-wallpaper.py:109
 msgid "Change now"
-msgstr ""
+msgstr "Cambia adesso"
 
 #: src/ngdownloader.py:181
 msgid "Photo credit"
-msgstr ""
+msgstr "Crediti foto"
