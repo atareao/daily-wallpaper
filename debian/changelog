@@ -1,3 +1,10 @@
+national-geographic-wallpaper (0.6.7-0extras20.04.0) focal; urgency=medium
+
+  * Add frech translation
+  * Add italian translation
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 20 Apr 2020 07:04:00 +0200
+
 national-geographic-wallpaper (0.6.6-0extras18.04.3) disco; urgency=medium
 
   * Added update on reboot
