@@ -30,7 +30,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <table>
   <tr>    
-    <td align="center"><a href="https://massimilianoarione.it/"><img src="https://avatars3.githubusercontent.com/u/179866?v=4" width="100px;" alt=""/><br /><sub><b>"Massimiliano Arione"</b></sub></a><br /><a href="https://github.com/atareao/national-geographic-wallpaper/commits?author=garak" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://massimilianoarione.it/"><img src="https://avatars3.githubusercontent.com/u/179866?v=4" width="100px;" alt=""/><br /><sub><b>Massimiliano Arione</b></sub></a><br /><a href="https://github.com/atareao/national-geographic-wallpaper/commits?author=garak" title="Translation">🌍</a></td>
     <td align="center"><a href="https://www.atareao.es"><img src="https://avatars3.githubusercontent.com/u/298055?v=4" width="100px;" alt=""/><br /><sub><b>Lorenzo Carbonell</b></sub></a><br /><a href="https://github.com/atareao/national-geographic-wallpaper/commits?author=atareao" title="Code">💻</a></td>
 </table>
 
