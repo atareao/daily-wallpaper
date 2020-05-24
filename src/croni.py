@@ -65,6 +65,7 @@ class Croni(object):
             job = self.cron.new(command=self.command,
                                 comment='NGW_EVERY_TWELVE')
             job.hour.every(12)
+            job.minute.on(5)
             job.enable()
             self.cron.write()
 
