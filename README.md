@@ -1,4 +1,4 @@
-# National Geographic Wallpaper
+# Daily Wallpaper
 
 
 ## Compatibility
