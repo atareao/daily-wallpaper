@@ -23,10 +23,20 @@ codefactor-badge: True
 <!-- end badges -->
 
 <!-- start description -->
+<h1 align="center">Welcome to <span id="project_title">Daily Wallpaper</span> 👋</h1>
+<p>
+<a href="https://www.atareao.es/apps/wallpapers-con-national-geographic-en-ubuntu/" id="homepage" rel="nofollow">
+<img align="right" height="128" id="icon" src="data/icons/hicolor/scalable/apps/daily-wallpaper.svg" width="128"/>
+</a>
+</p>
+<h2>🏠 <a href="https://www.atareao.es/apps/wallpapers-con-national-geographic-en-ubuntu/" id="homepage">Homepage</a></h2>
+
 A simple application to change your wallpaper every day from your must loved source
 <!-- end description -->
 
 <!-- start prerequisites -->
+## Prerequisites
+
 Before you begin, ensure you have met the following requirements:
 
 * If you install it from PPA don't worry about, becouse all the requirements are included in the package
@@ -46,7 +56,9 @@ gir1.2-notify-0.7
 <!-- end prerequisites -->
 
 <!-- start installing -->
-To install Tasker, follow these steps:
+## Installing <span id="project_title">Tasker</span>
+
+To install <span id="project_title">Daily Wallpaper</span>, follow these steps:
 
 * In a terminal (Ctrl+Alt+T), run these commands
 
@@ -58,23 +70,29 @@ sudo apt install daily-wallpaper
 <!-- end installing -->
 
 <!-- start using -->
+## Using <span id="project_title">Tasker</span>
+
 Run `daily-wallpaper` from launcher or application menu
 <!-- end using -->
 
 <!-- start contributing -->
-To contribute to Tasker, follow these steps:
+## Contributing to <span id="project_title">Tasker</span>
 
-    Fork this repository.
-    Create a branch: git checkout -b <branch_name>.
-    Make your changes and commit them: git commit -m '<commit_message>'
-    Push to the original branch: git push origin atareao/readmemaker
-    Create the pull request.
+To contribute to <span id="project_title">Tasker, follow these steps:
+
+* Fork this repository.
+* Create a branch: git checkout -b <branch_name>.
+* Make your changes and commit them: git commit -m '<commit_message>'
+* Push to the original branch: git push origin atareao/readmemaker
+* Create the pull request.
 
 Alternatively see the GitHub documentation on creating a pull request. </commit_message></branch_name>
 <!-- end contributing -->
 
 <!-- start contributors -->
+## 👤 Contributors ✨
 
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 <!-- end contributors -->
 
 <!-- start table-contributors -->
