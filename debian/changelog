@@ -1,56 +1,62 @@
-national-geographic-wallpaper (0.6.7-0extras20.04.2) focal; urgency=medium
+daily-wallpaper (0.7.0-0extras20.04.0) focal; urgency=medium
+
+  * Renamed
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 13 Jun 2020 17:46:51 +0200
+
+daily-wallpaper (0.6.7-0extras20.04.3) focal; urgency=medium
 
   * Add frech translation
   * Add italian translation
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 24 May 2020 17:24:59 +0200
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 13 Jun 2020 14:29:53 +0200
 
-national-geographic-wallpaper (0.6.6-0extras18.04.3) disco; urgency=medium
+daily-wallpaper (0.6.6-0extras18.04.3) disco; urgency=medium
 
   * Added update on reboot
   * Fixed a bug with sync in Disco Dingo
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 22 Jul 2019 08:08:30 +0200
 
-national-geographic-wallpaper (0.6.5-0extras18.04.0) bionic; urgency=medium
+daily-wallpaper (0.6.5-0extras18.04.0) bionic; urgency=medium
 
   *  Fixed a bug: application is creating a weird html file #15 
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Thu, 06 Sep 2018 22:49:52 +0200
 
-national-geographic-wallpaper (0.6.4-0extras18.04.0) bionic; urgency=medium
+daily-wallpaper (0.6.4-0extras18.04.0) bionic; urgency=medium
 
   * Updated data for National Geographic Photo of the day
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 25 Aug 2018 12:17:47 +0200
 
-national-geographic-wallpaper (0.6.3-0extras17.10.4) xenial; urgency=medium
+daily-wallpaper (0.6.3-0extras17.10.4) xenial; urgency=medium
 
   * Added Social Wallpapering
   * Fixed a bug with notifications in Ubuntu 18.04
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 18 Mar 2018 12:29:09 +0100
 
-national-geographic-wallpaper (0.6.2-0extras17.10.0) xenial; urgency=medium
+daily-wallpaper (0.6.2-0extras17.10.0) xenial; urgency=medium
 
   * Added wallhaven
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 25 Feb 2018 22:04:26 +0100
 
-national-geographic-wallpaper (0.6.1-0extras17.10.3) artful; urgency=medium
+daily-wallpaper (0.6.1-0extras17.10.3) artful; urgency=medium
 
   * Added cinnamon as supported desktop
   * Added Budgie as supported desktop
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 02 Dec 2017 19:07:43 +0100
 
-national-geographic-wallpaper (0.5.9-0extras17.10.12) artful; urgency=medium
+daily-wallpaper (0.5.9-0extras17.10.12) artful; urgency=medium
 
   * cron + autostart
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Thu, 16 Nov 2017 14:58:15 +0100
 
-national-geographic-wallpaper (0.5.9-0extras17.10.10) artful; urgency=medium
+daily-wallpaper (0.5.9-0extras17.10.10) artful; urgency=medium
 
   * cron
   * PNG
@@ -58,20 +64,20 @@ national-geographic-wallpaper (0.5.9-0extras17.10.10) artful; urgency=medium
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 14 Nov 2017 11:36:34 +0100
 
-national-geographic-wallpaper (0.5.9-0extras17.10.5) artful; urgency=medium
+daily-wallpaper (0.5.9-0extras17.10.5) artful; urgency=medium
 
   * Systemctl
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 11 Nov 2017 20:19:05 +0100
 
-national-geographic-wallpaper (0.5.0-0extras17.10.1) artful; urgency=medium
+daily-wallpaper (0.5.0-0extras17.10.1) artful; urgency=medium
 
   * Added NASA source 
   * Max length
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 06 Nov 2017 11:52:21 +0100
 
-national-geographic-wallpaper (0.4.9-0extras17.04.0) zesty; urgency=medium
+daily-wallpaper (0.4.9-0extras17.04.0) zesty; urgency=medium
 
   * Added Desktoppr source
   * Added change wallpaper in background
@@ -80,13 +86,13 @@ national-geographic-wallpaper (0.4.9-0extras17.04.0) zesty; urgency=medium
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Thu, 10 Aug 2017 10:39:23 +0200
 
-national-geographic-wallpaper (0.4.5-0extras16.04.0) zesty; urgency=medium
+daily-wallpaper (0.4.5-0extras16.04.0) zesty; urgency=medium
 
   * Added Fstoppers
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Fri, 23 Jun 2017 19:28:16 +0200
 
-national-geographic-wallpaper (0.4.4-0extras16.04.1) zesty; urgency=medium
+daily-wallpaper (0.4.4-0extras16.04.1) zesty; urgency=medium
 
   * Notification for National Geographic
   * Notification for GoPro
@@ -94,19 +100,19 @@ national-geographic-wallpaper (0.4.4-0extras16.04.1) zesty; urgency=medium
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Fri, 16 Jun 2017 07:24:05 +0200
 
-national-geographic-wallpaper (0.4.2-0extras16.04.0) xenial; urgency=medium
+daily-wallpaper (0.4.2-0extras16.04.0) xenial; urgency=medium
 
   * Added Powder Magazine source
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 09 Apr 2017 18:29:54 +0200
 
-national-geographic-wallpaper (0.4.1-0extras16.04.0) xenial; urgency=medium
+daily-wallpaper (0.4.1-0extras16.04.0) xenial; urgency=medium
 
   * Added GoPro source 
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 09 Apr 2017 12:29:09 +0200
 
-national-geographic-wallpaper (0.4.0-0extras16.04.0) xenial; urgency=medium
+daily-wallpaper (0.4.0-0extras16.04.0) xenial; urgency=medium
 
   * Added Bing source
   * Added option to select source
@@ -114,25 +120,25 @@ national-geographic-wallpaper (0.4.0-0extras16.04.0) xenial; urgency=medium
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 09 Apr 2017 11:04:39 +0200
 
-national-geographic-wallpaper (0.3.1-0extras16.04.0) xenial; urgency=medium
+daily-wallpaper (0.3.1-0extras16.04.0) xenial; urgency=medium
 
   * Added configuration for MATE
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 04 Apr 2017 21:33:33 +0200
 
-national-geographic-wallpaper (0.3.0-0extras16.04.2) xenial; urgency=medium
+daily-wallpaper (0.3.0-0extras16.04.2) xenial; urgency=medium
 
   * Change wallpaper on autostart
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Wed, 29 Mar 2017 08:04:55 +0200
 
-national-geographic-wallpaper (0.2.0-0extras16.04.2) xenial; urgency=medium
+daily-wallpaper (0.2.0-0extras16.04.2) xenial; urgency=medium
 
   * Added configuration to mate
 
  -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 27 Mar 2017 07:51:35 +0200
 
-national-geographic-wallpaper (0.1.0-0extras16.04.1) xenial; urgency=medium
+daily-wallpaper (0.1.0-0extras16.04.1) xenial; urgency=medium
 
   * First release
 

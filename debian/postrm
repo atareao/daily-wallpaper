@@ -1,5 +1,5 @@
 #!/bin/bash
-# postrm script for national-geographic-wallpaper
+# postrm script for daily-wallpaper
 #
 # see: dh_installdeb(1)
 
@@ -25,11 +25,11 @@ case "$1" in
     for user in $(cut -d: -f1 /etc/passwd)
     do
       crontab -u $user -l | grep -v 'NGW_EVERY_TWELVE' | crontab -u $user -
-      desktop_file="/home/"$user"/.config/autostart/national-geographic-wallpaper.desktop"
+      desktop_file="/home/"$user"/.config/autostart/daily-wallpaper.desktop"
       if [ -f $desktop_file ]; then
         rm $desktop_file
       fi
-      config_file="/home/"$user"/.config/national-geographic-wallpaper/national-geographic-wallpaper.conf"
+      config_file="/home/"$user"/.config/daily-wallpaper/daily-wallpaper.conf"
       if [ -f $config_file ]; then
         rm $config_file
       fi
@@ -40,7 +40,7 @@ case "$1" in
     for user in $(cut -d: -f1 /etc/passwd)
     do
       crontab -u $user -l | grep -v 'NGW_EVERY_TWELVE' | crontab -u $user -
-      desktop_file="/home/"$user"/.config/autostart/national-geographic-wallpaper.desktop"
+      desktop_file="/home/"$user"/.config/autostart/daily-wallpaper.desktop"
       if [ -f $desktop_file ]; then
         rm $desktop_file
       fi

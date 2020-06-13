@@ -34,14 +34,14 @@ install: build
 	dh_installdirs
 	dh_install
 	# Create languages directories
-	mkdir -p ${CURDIR}/debian/national-geographic-wallpaper/usr/share/locale-langpack/es/LC_MESSAGES
-	mkdir -p ${CURDIR}/debian/national-geographic-wallpaper/usr/share/locale-langpack/fr/LC_MESSAGES
-	mkdir -p ${CURDIR}/debian/national-geographic-wallpaper/usr/share/locale-langpack/it/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian/daily-wallpaper/usr/share/locale-langpack/es/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian/daily-wallpaper/usr/share/locale-langpack/fr/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian/daily-wallpaper/usr/share/locale-langpack/it/LC_MESSAGES
 	# End create languages directories
 	# Compile languages
-	msgfmt po/es.po -o ${CURDIR}/debian/national-geographic-wallpaper/usr/share/locale-langpack/es/LC_MESSAGES/national-geographic-wallpaper.mo
-	msgfmt po/fr.po -o ${CURDIR}/debian/national-geographic-wallpaper/usr/share/locale-langpack/fr/LC_MESSAGES/national-geographic-wallpaper.mo
-	msgfmt po/it.po -o ${CURDIR}/debian/national-geographic-wallpaper/usr/share/locale-langpack/it/LC_MESSAGES/national-geographic-wallpaper.mo
+	msgfmt po/es.po -o ${CURDIR}/debian/daily-wallpaper/usr/share/locale-langpack/es/LC_MESSAGES/daily-wallpaper.mo
+	msgfmt po/fr.po -o ${CURDIR}/debian/daily-wallpaper/usr/share/locale-langpack/fr/LC_MESSAGES/daily-wallpaper.mo
+	msgfmt po/it.po -o ${CURDIR}/debian/daily-wallpaper/usr/share/locale-langpack/it/LC_MESSAGES/daily-wallpaper.mo
 	# End comile languages
 	# Add here commands to install the package into debian/<packagename>.
 	#$(MAKE) prefix=`pwd`/debian/`dh_listpackages`/usr install

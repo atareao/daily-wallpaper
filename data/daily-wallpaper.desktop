@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Daily Wallpaper
+GenericName=Daily Wallpaper
+Comment=Set automatically a daily wallpaper
+Exec=/usr/bin/daily-wallpaper
+Icon=daily-wallpaper
+Type=Application
+Terminal=false
+StartupNotify=true
+Encoding=UTF-8
+Categories=Utility;
+X-Ubuntu-Gettext-Domain=daily-wallpaper
+Name[es_ES]=National Geographic Wallpaper
