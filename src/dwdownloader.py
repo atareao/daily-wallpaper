@@ -47,6 +47,7 @@ from plumbum import local
 sys.path.insert(1, comun.DAILIESDIR)
 sys.path.insert(1, comun.USERDAILIESDIR)
 
+
 def md5(filename):
     hash_md5 = hashlib.md5()
     with open(filename, 'rb') as f:
@@ -56,7 +57,7 @@ def md5(filename):
 
 
 def set_background(afile=None):
-    if afile and os.poath.exists(afile):
+    if afile and os.path.exists(afile):
         local.env['DISPLAY'] = ':0'
         local.env['GSETTINGS_BACKEND'] = 'dconf'
         gsettings = local['gsettings']
