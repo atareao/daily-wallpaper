@@ -33,6 +33,7 @@ codefactor-badge: True
 
 A simple application to change your wallpaper every day from your must loved source
 
+
 <!-- end description -->
 
 <!-- start prerequisites -->
@@ -55,6 +56,7 @@ gir1.2-gtk-3.0
 gir1.2-notify-0.7
 ```
 
+
 <!-- end prerequisites -->
 
 <!-- start installing -->
@@ -70,6 +72,7 @@ sudo apt update
 sudo apt install daily-wallpaper
 ```
 
+
 <!-- end installing -->
 
 <!-- start using -->
@@ -77,18 +80,21 @@ sudo apt install daily-wallpaper
 
 Run `daily-wallpaper` from launcher or application menu
 
+
 <!-- end using -->
 
 <!-- start contributing -->
 ## Contributing to <span id="project_title">Daily Wallpaper</span>
 
 To contribute to <span id="project_title">Daily Wallpaper</span>
+
 <!-- end contributing -->
 
 <!-- start contributors -->
 ## 👤 Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
 
 <!-- end contributors -->
 
@@ -116,6 +122,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 				<img src="https://avatars0.githubusercontent.com/u/396425?v=4" width="100px"/>
 			</a>
 		</td>
+		<td id="willemw12" align="center">
+			<a href="https://github.com/willemw12">
+				<img src="https://avatars1.githubusercontent.com/u/1303481?v=4" width="100px"/>
+			</a>
+		</td>
 	</tr>
 	<tr id="info_name">
 		<td id="atareao" align="center">
@@ -138,6 +149,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 				<strong>Silvio Tomatis</strong>
 			</a>
 		</td>
+		<td id="willemw12" align="center">
+			<a href="https://github.com/willemw12">
+				<strong>willemw12</strong>
+			</a>
+		</td>
 	</tr>
 	<tr id="info_commit">
 		<td id="atareao" align="center">
@@ -158,6 +174,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 		<td id="silviot" align="center">
 			<a href="/commits?author=silviot">
 				<span id="role">📖</span>
+			</a>
+		</td>
+		<td id="willemw12" align="center">
+			<a href="/commits?author=willemw12">
+				<span id="role">🐛</span>
 			</a>
 		</td>
 	</tr>
