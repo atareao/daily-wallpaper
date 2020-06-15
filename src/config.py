@@ -26,7 +26,7 @@
 import codecs
 import os
 import json
-from comun import CONFIG_DIR
+from comun import CONFIG_APP_DIR
 from comun import CONFIG_FILE
 from comun import PARAMS
 
@@ -39,9 +39,10 @@ class Configuration(object):
 
     def check(self):
         if not os.path.exists(CONFIG_FILE):
-            if not os.path.exists(CONFIG_DIR):
-                os.makedirs(CONFIG_DIR, 0o700)
-            open(CONFIG_FILE, 'a').close()
+            if not os.path.exists(CONFIG_APP_DIR):
+                os.makedirs(CONFIG_APP_DIR, 0o700)
+            with open(CONFIG_FILE, 'a'):
+                os.utime(CONFIG_FILE, None)
             os.chmod(CONFIG_FILE, 0o600)
 
     def has(self, key):
@@ -51,7 +52,6 @@ class Configuration(object):
         try:
             return self.params[key]
         except KeyError as e:
-            print(e)
             self.params[key] = PARAMS[key]
             return self.params[key]
 
@@ -73,13 +73,11 @@ class Configuration(object):
         try:
             f = codecs.open(CONFIG_FILE, 'r', 'utf-8')
         except IOError as e:
-            print(e)
             self.save()
             f = codecs.open(CONFIG_FILE, 'r', 'utf-8')
         try:
             self.params = json.loads(f.read())
         except ValueError as e:
-            print(e)
             self.save()
         f.close()
 
