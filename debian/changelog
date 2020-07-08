@@ -1,8 +1,9 @@
-daily-wallpaper (0.7.0-0extras20.04.3) focal; urgency=medium
+daily-wallpaper (0.7.0-0extras20.04.4) focal; urgency=medium
 
   * Renamed
+  * Fiexd UnboundLocalError: local variable 'md5_old' referenced before assignment (#26)
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 15 Jun 2020 20:34:41 +0200
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Wed, 08 Jul 2020 06:28:10 +0200
 
 daily-wallpaper (0.6.7-0extras20.04.3) focal; urgency=medium
 

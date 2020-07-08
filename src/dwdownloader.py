@@ -101,10 +101,10 @@ def download(url):
         filename = url[7:]
         if os.path.exists(filename):
             if os.path.exists(comun.POTD):
+                md5_new = md5(filename)
                 md5_old = md5(comun.POTD)
-            md5_new = md5(filename)
-            if md5_old == md5_new:
-                return False
+                if md5_old == md5_new:
+                    return False
             shutil.copy(filename, comun.POTD)
             return True
         return False

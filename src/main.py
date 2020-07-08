@@ -129,11 +129,15 @@ class DWW(Gtk.Window):
         hb.props.title = comun.APP
 
         button_cancel = Gtk.Button.new_with_label(_('Cancel'))
+        button_cancel.get_style_context().add_class(
+            Gtk.STYLE_CLASS_DESTRUCTIVE_ACTION)
         button_cancel.set_halign(Gtk.Align.START)
         button_cancel.connect('clicked', self.on_button_cancel_clicked)
         hb.pack_start(button_cancel)
 
         button_ok = Gtk.Button.new_with_label(_('Ok'))
+        button_ok.get_style_context().add_class(
+            Gtk.STYLE_CLASS_SUGGESTED_ACTION)
         button_ok.set_halign(Gtk.Align.END)
         button_ok.connect('clicked', self.on_button_ok_clicked)
         hb.pack_end(button_ok)
