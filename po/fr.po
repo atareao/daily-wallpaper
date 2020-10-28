@@ -26,8 +26,8 @@ msgid "Change wallpaper automatically?"
 msgstr "Changer automatiquement le fond d'écran?"
 
 #: src/national-geographic-wallpaper.py:88
-msgid "Select backgrounds source"
-msgstr "Sélectionner la source des fonds d'écran"
+msgid "Select backgrounds source:"
+msgstr "Sélectionner la source des fonds d'écran:"
 
 #: src/national-geographic-wallpaper.py:93
 msgid "National Geographic"
@@ -67,8 +67,17 @@ msgstr "Social Wallpapering"
 
 #: src/national-geographic-wallpaper.py:109
 msgid "Change now"
-msgstr "Cambia adesso"
+msgstr "Changer maintenant"
 
 #: src/ngdownloader.py:181
 msgid "Photo credit"
 msgstr "Crédits photo"
+
+msgid "Random source?"
+msgstr "Source aléatoire?"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Ok"
+msgstr "Ok"
