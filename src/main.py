@@ -95,9 +95,11 @@ class DWW(Gtk.Window):
             source_store.append([daily.get_name(), daily.get_id()])
 
         self.treeview_source = Gtk.TreeView(model=source_store)
-        renderer = Gtk.CellRendererText()
         self.treeview_source.append_column(
-            Gtk.TreeViewColumn(title='Background sources', cell_renderer=renderer, text=0))
+            Gtk.TreeViewColumn(title='Background sources',
+                cell_renderer=Gtk.CellRendererText(), text=0
+            )
+        )
         grid.attach(self.treeview_source, 0, 2, 2, 1)
 
         button = Gtk.Button.new_with_label(_('Change now'))
