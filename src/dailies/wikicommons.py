@@ -22,6 +22,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+__author__ = 'Ahmad Gharbeia'
+__email__ = 'ahmad@gharbeia.org'
+__copyright__ = 'Copyright (c) 2021 Ahmad Gharbeia'
+__license__ = 'GPLV3'
+__url__ = 'https://ahmad.gharbeia.org'
+__version__ = '0.1.0'
+
 import requests
 import os
 import sys
