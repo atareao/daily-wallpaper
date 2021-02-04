@@ -45,7 +45,7 @@ CONFIG_FILE = os.path.join(CONFIG_APP_DIR, APP_CONF)
 POTD = os.path.join(CONFIG_APP_DIR, 'potd.jpg')
 PARAMS = {
     'random': True,
-    'source': None
+    'source': []
 }
 # check if running from source
 if str(Path(__file__).parent.absolute()).startswith('/usr'):
