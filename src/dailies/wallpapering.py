@@ -48,7 +48,7 @@ def get_daily():
 
 class Wallpapering(Daily):
     _id = __name__
-    _name = _('Wallpapering')
+    _name = _('Social Wallpapering')
 
     def __init__(self):
         Daily.__init__(self)
