@@ -27,8 +27,8 @@ msgid "Change wallpaper automatically?"
 msgstr "Zmieniać tapetę automatycznie?"
 
 #: src/national-geographic-wallpaper.py:88
-msgid "Select backgrounds source"
-msgstr "Wybierz źródło tła"
+msgid "Select backgrounds source:"
+msgstr "Wybierz źródło tła:"
 
 #: src/national-geographic-wallpaper.py:93
 msgid "National Geographic"

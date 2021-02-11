@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # This file is part of daily-wallpaper
 #
-# Copyright (c) 2017 Lorenzo Carbonell Cerezo <a.k.a. atareao>
+# Copyright (c) 2021 Ahmad Gharbeia
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +22,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+__author__ = 'Ahmad Gharbeia'
+__email__ = 'ahmad@gharbeia.org'
+__copyright__ = 'Copyright (c) 2021 Ahmad Gharbeia'
+__license__ = 'GPLV3'
+__url__ = 'https://ahmad.gharbeia.org'
+__version__ = '0.1.0'
+
 import requests
-from lxml.html import fromstring
-from random import randint
 import os
 import sys
 
@@ -39,46 +43,47 @@ else:
 from daily import Daily
 from comun import _
 
-URL = 'https://www.socwall.com/{}'
-
-
 def get_daily():
-    return Wallpapering()
+    return Wikicommons()
 
 
-class Wallpapering(Daily):
+class Wikicommons(Daily):
     _id = __name__
-    _name = _('Social Wallpapering')
+    _name = _('Wikimedia Commons')
+
+    ENDPOINT = 'https://commons.wikimedia.org/w/api.php'
+    SESSION = requests.Session()
 
     def __init__(self):
         Daily.__init__(self)
-
+        
     def resolve_url(self):
         try:
-            r = requests.get(URL.format(''))
-            if r.status_code == 200:
-                doc = fromstring(r.text)
-                results = doc.cssselect('li.pageNumber a')
-                page = randint(1, int(results[-1].text))
-                url = URL.format('wallpapers/page:{}/'.format(page))
-                r = requests.get(url)
-                if r.status_code == 200:
-                    doc = fromstring(r.text)
-                    results = doc.cssselect(
-                        'ul.wallpaperList li.wallpaper a.image')
-                    if len(results) > 0:
-                        image = randint(0, len(results) - 1)
-                        url = URL.format(results[image].attrib['href'][1:])
-                        r = requests.get(url)
-                        if r.status_code == 200:
-                            doc = fromstring(r.text)
-                            results = doc.cssselect(
-                                'div.wallpaperProfile div.wallpaper \
-        a.wallpaperImageLink')
-                            if len(results) > 0:
-                                self._url = URL.format(
-                                    results[0].attrib['href'][1:])
-                                return True
+            metadata = next(
+               iter(
+                (self.SESSION.get(
+                  url = self.ENDPOINT,
+                  params = {
+                    'action': 'query',
+                    'format': 'json',
+                    'prop': 'imageinfo',
+                    'iiprop': 'url|extmetadata',
+                    'titles': self.SESSION.get(
+                        url = self.ENDPOINT,
+                        params = {
+                          'action': 'query',
+                          'format': 'json',
+                          'formatversion': '2',
+                          'prop': 'images',
+                          'titles': 'Commons:Picture_of_the_day'
+                        }).json()['query']['pages'][0]['images'][0]['title']
+                  }).json()['query']['pages']).values()))
+            self._title = metadata['title']
+            self._url = metadata['imageinfo'][0]['url']
+            extmetadata = metadata['imageinfo'][0]['extmetadata']
+            self._caption = extmetadata['ImageDescription']['value']
+            self._credit = extmetadata['Credit']['value']
+            return True
         except Exception as exception:
             print(exception)
         return False

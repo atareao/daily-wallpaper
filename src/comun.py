@@ -45,7 +45,7 @@ CONFIG_FILE = os.path.join(CONFIG_APP_DIR, APP_CONF)
 POTD = os.path.join(CONFIG_APP_DIR, 'potd.jpg')
 PARAMS = {
     'random': True,
-    'source': None
+    'source': []
 }
 # check if running from source
 if str(Path(__file__).parent.absolute()).startswith('/usr'):
@@ -88,7 +88,7 @@ def get_desktop_environment():
     desktop_session = os.environ.get("DESKTOP_SESSION")
     if desktop_session is not None:
         desktop_session = desktop_session.lower()
-        if desktop_session in ["gnome", "unity", "cinnamon"
+        if desktop_session in ["gnome", "unity", "cinnamon",
                                "budgie-desktop", "xfce4", "lxde", "fluxbox",
                                "blackbox", "openbox", "icewm", "jwm",
                                "afterstep", "trinity", "kde"]:

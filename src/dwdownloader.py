@@ -136,12 +136,11 @@ def download(url):
 
 def change_wallpaper():
     config = Configuration()
-    source = config.get('source')
-    random = config.get('random')
-    if random:
-        modules = get_modules()
-        selected = randrange(len(modules))
-        source = modules[selected]
+    if config.get('random'):
+        sources = config.get('source')
+        source = sources[randrange(len(sources))]
+    else:
+        source = config.get('source')[0]
     module = importlib.import_module(source)
     daily = module.get_daily()
     if daily.resolve_url():

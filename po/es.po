@@ -26,8 +26,8 @@ msgid "Change wallpaper automatically?"
 msgstr "¿Cambio el fondo de pantalla automáticamente?"
 
 #: src/national-geographic-wallpaper.py:88
-msgid "Select backgrounds source"
-msgstr "Selecciona el origen de los fondos de pantalla"
+msgid "Select backgrounds source:"
+msgstr "Selecciona el origen de los fondos de pantalla:"
 
 #: src/national-geographic-wallpaper.py:93
 msgid "National Geographic"
@@ -59,11 +59,11 @@ msgstr "Nasa"
 
 #: src/national-geographic-wallpaper.py:100
 msgid "Wallhaven"
-msgstr ""
+msgstr "Wallhaven"
 
 #: src/national-geographic-wallpaper.py:101
 msgid "Social Wallpapering"
-msgstr ""
+msgstr "Social Wallpapering"
 
 #: src/national-geographic-wallpaper.py:109
 msgid "Change now"
