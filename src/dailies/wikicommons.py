@@ -60,35 +60,32 @@ class Wikicommons(Daily):
     def resolve_url(self):
         try:
             metadata = next(
-                        iter(
-                         (self.SESSION.get(
-                           url = self.ENDPOINT,
-                           params = {
-                             'action': 'query',
-                             'format': 'json',
-                             'prop': 'imageinfo',
-                             'iiprop': 'url|extmetadata',
-                             'titles': self.SESSION.get(
-                                 url = self.ENDPOINT,
-                                 params = {
-                                   'action': 'query',
-                                   'format': 'json',
-                                   'formatversion': '2',
-                                   'prop': 'images',
-                                   'titles': 'Commons:Picture_of_the_day'
-                                 }).json()['query']['pages'][0]['images'][0]['title']
-                           }).json()['query']['pages']).values()))
-            
+               iter(
+                (self.SESSION.get(
+                  url = self.ENDPOINT,
+                  params = {
+                    'action': 'query',
+                    'format': 'json',
+                    'prop': 'imageinfo',
+                    'iiprop': 'url|extmetadata',
+                    'titles': self.SESSION.get(
+                        url = self.ENDPOINT,
+                        params = {
+                          'action': 'query',
+                          'format': 'json',
+                          'formatversion': '2',
+                          'prop': 'images',
+                          'titles': 'Commons:Picture_of_the_day'
+                        }).json()['query']['pages'][0]['images'][0]['title']
+                  }).json()['query']['pages']).values()))
             self._title = metadata['title']
             self._url = metadata['imageinfo'][0]['url']
-            self._caption = metadata['imageinfo'][0]['extmetadata']['ImageDescription']['value']
-            self._credit = metadata['imageinfo'][0]['extmetadata']['Credit']['value']
-
+            extmetadata = metadata['imageinfo'][0]['extmetadata']
+            self._caption = extmetadata['ImageDescription']['value']
+            self._credit = extmetadata['Credit']['value']
             return True
-
-        except Exception:
-            pass
-
+        except Exception as exception:
+            print(exception)
         return False
 
 
