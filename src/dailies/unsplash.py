@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # This file is part of daily-wallpaper
@@ -28,6 +27,7 @@ from lxml.html import fromstring
 import re
 import os
 import sys
+import json
 
 if __file__.startswith('/usr') or os.getcwd().startswith('/usr'):
     sys.path.insert(1, '/usr/share/daily-wallpaper')
@@ -68,16 +68,19 @@ class Unsplash(Daily):
                         if r.status_code == 200:
                             pattern = r'<img\s.*\salt=\"{}\">'.format(title)
                             doc = fromstring(r.text)
-                            results = doc.cssselect('img')
+                            results = doc.cssselect('script')
+                            data = None
                             for result in results:
-                                if 'alt' in result.attrib and \
-                                        result.attrib['alt'] == title:
-                                    url = re.findall(r'^([^\?]*)',
-                                                     result.attrib['src'])
-                                    if url:
-                                        self._url = '{}?h=1920'.format(url[0])
-                                        self._title = title
-                                        return True
+                                if 'type' in result.attrib and \
+                                        result.attrib['type'] == \
+                                        'application/ld+json':
+                                    data = json.loads(result.text)
+                                    break
+                            if data is not None:
+                                self._url = data['contentUrl'] + \
+                                    '&fit=crop&w=1920'
+                                self._title = title
+                            return True
         except Exception as exception:
             print(exception)
         return False
@@ -86,4 +89,4 @@ class Unsplash(Daily):
 if __name__ == '__main__':
     daily = get_daily()
     if daily.resolve_url():
-        print(daily)
+        print(daily._title, daily._url)
