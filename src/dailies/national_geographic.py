@@ -26,6 +26,8 @@
 import requests
 import os
 import sys
+import re
+import json
 
 if __file__.startswith('/usr') or os.getcwd().startswith('/usr'):
     sys.path.insert(1, '/usr/share/daily-wallpaper')
@@ -37,6 +39,7 @@ from daily import Daily
 from comun import _
 
 URL = 'https://www.nationalgeographic.com/photography/photo-of-the-day/{}'
+URL = 'https://www.nationalgeographic.com/photo-of-the-day/'
 
 
 def get_daily():
@@ -52,17 +55,36 @@ class NationalGeographic(Daily):
 
     def resolve_url(self):
         url = URL.format('_jcr_content/.gallery.json')
+        url = URL.format("index.html")
+        url = URL
         try:
-            r = requests.get(url)
+            r = requests.get(url, allow_redirects=True)
             if r.status_code == 200:
-                data = r.json()
-                if 'items' in data:
-                    photo = data['items'][0]['image']
-                    self._url = photo['uri']
-                    self._title = photo['title']
-                    self._caption = photo['caption']
-                    self._credit = photo['credit']
-                    return True
+                pattern = r"window\['__natgeo__'\]=(.*);\s*</script>"
+                data = re.findall(pattern, r.text)
+                if len(data) > 0:
+                    data = json.loads(data[0])
+                    if 'page' in data and \
+                            'content' in data['page'] and \
+                            'mediaspotlight' in data['page']['content'] and \
+                            'frms' in data['page']['content']['mediaspotlight']:
+                        frames = data['page']['content']['mediaspotlight']['frms']
+                        if len(frames) > 0 and \
+                                'mods' in frames[0] and \
+                                len(frames[0]['mods']) > 0 and \
+                                'edgs' in frames[0]['mods'][0] and \
+                                len(frames[0]['mods'][0]['edgs']) > 1 and \
+                                'media' in frames[0]['mods'][0]['edgs'][1]:
+                            media = frames[0]['mods'][0]['edgs'][1]['media']
+                            if len(media) > 0 and 'img' in media[0]:
+                                photo = media[0]['img']
+                                self._url = photo['src']
+                                self._title = photo['altText']
+                                self._caption = photo['dsc']
+                                self._credit = photo['crdt']
+                                return True
+            else:
+                print(r.status_code)
         except Exception as exception:
             print(exception)
         return False

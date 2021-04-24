@@ -22,12 +22,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import requests
-from lxml.html import fromstring
 import re
 import os
 import sys
 import json
+import requests
+from lxml.html import fromstring
 
 if __file__.startswith('/usr') or os.getcwd().startswith('/usr'):
     sys.path.insert(1, '/usr/share/daily-wallpaper')

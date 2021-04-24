@@ -37,6 +37,7 @@ GSET_GNOME = 'gsettings set org.gnome.desktop.background picture-uri \
 GSET_MATE = 'gsettings set org.mate.background picture-filename "%s"'
 GSET_CINNAMON = 'gsettings set org.cinnamon.desktop.background picture-uri \
 "file://%s"'
+GSET_FEH = 'feh --bg-scale {}'
 FILE = '.config/daily-wallpaper/potd.jpg'
 NO_OUTPUT = '>/dev/null 2>&1'
 
@@ -55,6 +56,8 @@ class Croni(object):
             gset = GSET_MATE % filename
         elif desktop_environment == "cinnamon":
             gset = GSET_CINNAMON % filename
+        elif desktop_environment == "feh":
+            gset = GSET_FEH.format(filename)
         else:
             gset = None
         if gset is not None:

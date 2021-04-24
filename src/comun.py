@@ -116,6 +116,13 @@ def get_desktop_environment():
         return "xfce4"
     elif is_running("ksmserver"):
         return "kde"
+    else:
+        desktop_session = os.environ.get('XDG_SESSION_DESKTOP')
+        print(desktop_session)
+        if desktop_session.lower() in ['bspwm', 'i3', 'qtile']:
+            which = local['which']
+            if which['feh']():
+                return 'feh'
     return "unknown"
 
 

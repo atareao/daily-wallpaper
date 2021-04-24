@@ -73,6 +73,9 @@ def set_background(afile=None):
         elif desktop_environment == "cinnamon":
             gsettings['set', 'org.cinnamon.desktop.background', 'picture-uri',
                       'file://{}'.format(afile)]()
+        elif desktop_environment == 'feh':
+            feh = local['feh']
+            feh['--bg-scale', afile]()
 
 
 def notify_photo_caption(title, caption=None, credit=None):
