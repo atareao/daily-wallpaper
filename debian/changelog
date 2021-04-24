@@ -1,8 +1,9 @@
 daily-wallpaper (0.8.1-0extras20.04.0) focal; urgency=medium
 
   * Fix National Geographic
+  * Add bspwm
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 24 Apr 2021 12:39:43 +0200
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 24 Apr 2021 12:44:41 +0200
 
 daily-wallpaper (0.8.0-0extras20.04.0) focal; urgency=medium
 

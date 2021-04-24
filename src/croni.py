@@ -56,7 +56,8 @@ class Croni(object):
             gset = GSET_MATE % filename
         elif desktop_environment == "cinnamon":
             gset = GSET_CINNAMON % filename
-        elif desktop_environment == "feh":
+        elif desktop_environment == "feh" or \
+                desktop_environment == "bspwm":
             gset = GSET_FEH.format(filename)
         else:
             gset = None
