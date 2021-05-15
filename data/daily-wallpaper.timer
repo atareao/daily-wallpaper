@@ -1,0 +1,9 @@
+[Unit]
+Description=Update wallpaper every 12 hours
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
