@@ -48,6 +48,20 @@ sys.path.insert(1, comun.DAILIESDIR)
 sys.path.insert(1, comun.USERDAILIESDIR)
 
 
+def select_value_in_combo(combo, value):
+    model = combo.get_model()
+    for i, item in enumerate(model):
+        if value == item[1]:
+            combo.set_active(i)
+            return
+    combo.set_active(0)
+
+
+def get_selected_value_in_combo(combo):
+    model = combo.get_model()
+    return model.get_value(combo.get_active_iter(), 1)
+
+
 class DWW(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self)
@@ -87,20 +101,22 @@ class DWW(Gtk.Window):
         self.switch_random.connect('state-set', self.on_switch_random_changed)
         grid.attach(self.switch_random, 1, 1, 1, 1)
 
+        self.label30 = Gtk.Label.new(_('Select backgrounds source:'))
+        self.label30.set_halign(True)
+        grid.attach(self.label30, 0, 2, 1, 1)
+
         source_store = Gtk.ListStore(str, str)
         source_store.set_sort_func(0, self.tree_compare_func, None)
         for module_name in get_modules():
             module = importlib.import_module(module_name)
             daily = module.get_daily()
             source_store.append([daily.get_name(), daily.get_id()])
-
-        self.treeview_source = Gtk.TreeView(model=source_store)
-        self.treeview_source.append_column(
-            Gtk.TreeViewColumn(title='Background sources',
-                cell_renderer=Gtk.CellRendererText(), text=0
-            )
-        )
-        grid.attach(self.treeview_source, 0, 2, 2, 1)
+        self.combobox_source = Gtk.ComboBox.new()
+        self.combobox_source.set_model(source_store)
+        cell1 = Gtk.CellRendererText()
+        self.combobox_source.pack_start(cell1, True)
+        self.combobox_source.add_attribute(cell1, 'text', 0)
+        grid.attach(self.combobox_source, 1, 2, 1, 1)
 
         button = Gtk.Button.new_with_label(_('Change now'))
         button.set_halign(Gtk.Align.CENTER)
@@ -150,14 +166,13 @@ class DWW(Gtk.Window):
     def on_button_cancel_clicked(self, widget):
         self.destroy()
 
-    def set_selection_mode(self, random: bool) -> None :
-        if random:
-            (self.treeview_source.get_selection()).set_mode(Gtk.SelectionMode.MULTIPLE)
-        else:
-            (self.treeview_source.get_selection()).set_mode(Gtk.SelectionMode.BROWSE)
+    def set_source_state(self, state):
+        self.label30.set_sensitive(state)
+        self.combobox_source.set_sensitive(state)
 
     def on_switch_random_changed(self, widget, state):
-        self.set_selection_mode(state)
+        state = self.switch_random.get_active()
+        self.set_source_state(not state)
 
     def set_autostart_activate(self):
         if self.switch.get_active():
@@ -174,27 +189,14 @@ class DWW(Gtk.Window):
         exit(0)
 
     def load_preferences(self):
-
-        def set_selection_in_view(widget: Gtk.Widget, selections: list) -> None :
-            tree_selection = widget.get_selection()
-            for i, source in enumerate(widget.get_model()):
-                if source[1] in selections :
-                    tree_selection.select_path(Gtk.TreePath(i))
-
         config = Configuration()
+        select_value_in_combo(self.combobox_source, config.get('source'))
         self.switch_random.set_active(config.get('random'))
-        self.set_selection_mode(self.switch_random.get_active())
-        set_selection_in_view(self.treeview_source, config.get('source'))
+        self.set_source_state(not config.get('random'))
 
     def save_preferences(self):
-
-        def get_selection_from_view(widget: Gtk.TreeView) -> list :
-            _, selections = (widget.get_selection()).get_selected_rows()
-            model = widget.get_model()
-            return [model.get_value(model.get_iter(selection),1) for selection in selections]
-
         config = Configuration()
-        config.set('source', get_selection_from_view(self.treeview_source))
+        config.set('source', get_selected_value_in_combo(self.combobox_source))
         config.set('random', self.switch_random.get_active())
         config.save()
 
@@ -213,7 +215,11 @@ class DWW(Gtk.Window):
         do_change_wallpaper_in_thread()
 
     def on_realize(self, *_):
-        monitor = Gdk.Display.get_primary_monitor(Gdk.Display.get_default())
+        display = Gdk.Display.get_default()
+        seat = display.get_default_seat()
+        pointer = seat.get_pointer()
+        screen, x, y = pointer.get_position()
+        monitor = display.get_monitor_at_point(x, y)
         scale = monitor.get_scale_factor()
         monitor_width = monitor.get_geometry().width / scale
         monitor_height = monitor.get_geometry().height / scale

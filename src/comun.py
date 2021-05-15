@@ -119,7 +119,7 @@ def get_desktop_environment():
     else:
         desktop_session = os.environ.get('XDG_SESSION_DESKTOP')
         print(desktop_session)
-        if desktop_session.lower() in ['bspwm', 'i3', 'qtile']:
+        if desktop_session and desktop_session.lower() in ['bspwm', 'i3', 'qtile']:
             which = local['which']
             if which['feh']():
                 return 'feh'
