@@ -46,7 +46,8 @@ from plumbum import local
 
 sys.path.insert(1, comun.DAILIESDIR)
 sys.path.insert(1, comun.USERDAILIESDIR)
-
+print(comun.DAILIESDIR)
+print(comun.USERDAILIESDIR)
 
 def md5(filename):
     hash_md5 = hashlib.md5()
@@ -143,7 +144,9 @@ def change_wallpaper():
         sources = config.get('source')
         source = sources[randrange(len(sources))]
     else:
-        source = config.get('source')[0]
+        source = config.get('source')
+    print(source)
+    print(config.get('source'))
     module = importlib.import_module(source)
     daily = module.get_daily()
     if daily.resolve_url():
