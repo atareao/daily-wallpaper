@@ -1,8 +1,9 @@
-daily-wallpaper (0.8.2-0extras20.04.0) focal; urgency=medium
+daily-wallpaper (0.8.2-0extras20.04.1) focal; urgency=medium
 
   * Fix #35
+  * Debug mode # 34
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 16 May 2021 08:26:42 +0200
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 16 May 2021 09:31:10 +0200
 
 daily-wallpaper (0.8.1-0extras20.04.0) focal; urgency=medium
 

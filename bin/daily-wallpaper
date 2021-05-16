@@ -25,26 +25,49 @@
 
 import sys
 import os
+import argparse
+import importlib
 from pathlib import Path
 
-if __name__ == '__main__':
-    os.environ['NO_AT_BRIDGE'] = '1'
-    if str(Path(__file__).parent.absolute()).startswith('/usr'):
-        srcpath = '/usr/share/daily-wallpaper'
-    else:
-        srcpath = str(Path(__file__).parent.parent.absolute() / 'src')
-    sys.path.insert(1, srcpath)
 
+os.environ['NO_AT_BRIDGE'] = '1'
+if str(Path(__file__).absolute()).startswith('/usr'):
+    srcpath = '/usr/share/daily-wallpaper'
+else:
+    srcpath = str(Path(__file__).absolute().parents[1] / 'src')
+sys.path.insert(1, srcpath)
+
+
+def main_process():
     from main import main
     try:
-        """
-        This remove the  message warning:
-        Couldn't register with accessibility bus: Did not receive a reply.
-        Possible causes include: the remote application did not send a reply,
-        the message bus security policy blocked the reply, the reply timeout
-        expired, or the network connection was broken.
-        """
         main()
     except KeyboardInterrupt as exception:
         print(exception)
+
+def parser():
+    import comun
+    from comun import get_modules
+    sys.path.insert(1, comun.DAILIESDIR)
+    sys.path.insert(1, comun.USERDAILIESDIR)
+    parser = argparse.ArgumentParser(description="Change wallapaper every day")
+    parser.add_argument('-l', '--list', action="store_true",
+                        help='list the available modules')
+    parser.add_argument('-d', '--debug', help='debug selected module')
+    args = parser.parse_args()
+    if args.list:
+        for module_name in get_modules():
+            print(module_name)
+    elif args.debug:
+        module = importlib.import_module(args.debug)
+        daily = module.get_daily()
+        daily.resolve_url()
+        url = daily.get_url()
+        print(url)
+
+if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        parser()
+    else:
+        main_process()
 exit(0)
