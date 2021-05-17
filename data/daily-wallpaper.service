@@ -6,4 +6,4 @@ Environment="DISPLAY=:0"
 Environment="DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
 Environment="GSETTINGS_BACKEND=dconf"
 Type=oneshot
-ExecStart=/usr/bin/python3 /usr/share/daily-wallpaper/dwdownloader.py >/dev/null 2>&1 && gsettings set org.gnome.desktop.background picture-uri "file:///home/lorenzo/.config/daily-wallpaper/potd.jpg" >/dev/null 2>&1
+ExecStart=/usr/bin/python3 /usr/share/daily-wallpaper/dwdownloader.py
